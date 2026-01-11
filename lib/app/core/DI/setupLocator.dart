@@ -1,0 +1,58 @@
+import 'package:chat_app_fe/app/core/auth/authservice.dart';
+import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
+import 'package:chat_app_fe/app/core/networking/dio_instance.dart';
+import 'package:chat_app_fe/app/view/features/Home/data/datasource/home_datasource.dart';
+import 'package:chat_app_fe/app/view/features/Home/data/repositories/home_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Home/data/service/home_service.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Login/data/datasource/login_data_source.dart';
+import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Login/data/service/login_service.dart';
+import 'package:chat_app_fe/app/view/features/Login/domain/repositories/login_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
+
+Future<void> setupLocator(GetIt getIt) async {
+  getIt.registerLazySingleton<FlutterSecureStorage>(
+    () => FlutterSecureStorage(),
+  );
+  getIt.registerLazySingleton<Localstorage>(
+    () => Localstorage(pref: getIt<FlutterSecureStorage>()),
+  );
+  getIt.registerLazySingleton<HomeUsecases>(
+    () => HomeUsecasesImpl(homeRepositories: getIt<HomeRepositories>()),
+  );
+  getIt.registerLazySingleton<HomeRepositories>(
+    () => HomeRepositoriesImpl(
+      homeDatasource: getIt<HomeDatasource>(),
+      localstorage: getIt<Localstorage>(),
+    ),
+  );
+  getIt.registerLazySingleton<DioInstance>(() => DioInstance());
+  getIt.registerLazySingleton<HomeService>(
+    () => HomeService(getIt<DioInstance>().dio),
+  );
+  getIt.registerLazySingleton<HomeDatasource>(
+    () => HomeDatasourceImpl(homeService: getIt<HomeService>()),
+  );
+  getIt.registerLazySingleton<LoginService>(
+    () => LoginService(getIt<DioInstance>().dio),
+  );
+  getIt.registerLazySingleton<LoginDataSource>(
+    () => LoginDataSourceImpl(loginService: getIt<LoginService>()),
+  );
+  getIt.registerLazySingleton<LoginRepositories>(
+    () => LoginRepositoriesImpl(
+      loginDataSource: getIt<LoginDataSource>(),
+      localstorage: getIt<Localstorage>(),
+    ),
+  );
+  getIt.registerLazySingleton<Authservice>(
+    () => Authservice(getIt<DioInstance>().dio),
+  );
+  getIt.registerLazySingleton<LoginUsecases>(
+    () => LoginUsecasesImpl(loginRepositories: getIt<LoginRepositories>()),
+  );
+}

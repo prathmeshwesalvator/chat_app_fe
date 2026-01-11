@@ -1,0 +1,39 @@
+import 'package:chat_app_fe/app/core/DI/setupLocator.dart';
+import 'package:chat_app_fe/app/global/routes/app_route.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Login/ui/bloc/login_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.asNewInstance();
+final appRoute = AppRoute();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator(getIt);
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => HomeCubit(homeUsecases: getIt<HomeUsecases>()),
+        ),
+        BlocProvider(create: (_) => LoginCubit(loginUsecases: getIt<LoginUsecases>()))
+      ],
+      child: MaterialApp.router(
+        title: 'Flutter Demo',
+        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+        routerConfig: appRoute.config(),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+  }
+}
