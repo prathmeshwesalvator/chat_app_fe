@@ -1,5 +1,6 @@
 import 'package:chat_app_fe/app/core/DI/setupLocator.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
+import 'package:chat_app_fe/app/global/theme/app_theme.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'Flutter Demo',
-        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
         routerConfig: appRoute.config(),
         debugShowCheckedModeBanner: false,
       ),
