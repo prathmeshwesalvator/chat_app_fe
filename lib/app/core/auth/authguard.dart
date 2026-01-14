@@ -19,17 +19,9 @@ class Authguard extends AutoRouteGuard {
     final token = await localstorage.getToken();
 
     if (token.isEmpty) {
-      return router.replaceAll([LoginRoute()]);
+      return router.replaceAll([const LoginRoute()]);
     }
 
     return resolver.next();
-
-    // try {
-    //   await authservice.validateToken();
-
-    //   return resolver.next();
-    // } catch (e) {
-    //   return router.replaceAll([LoginRoute()]);
-    // }
   }
 }

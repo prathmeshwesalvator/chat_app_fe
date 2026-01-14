@@ -1,4 +1,3 @@
-import 'package:chat_app_fe/app/global/shared_widgets/circular_logo.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -8,17 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        spacing: 5,
         children: [
-          CircularLogo(
-            size: 50,
-            animate: true,
-            animationDuration: Duration(milliseconds: 300),
+          Text(
+            'Chat Sphere',
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+              color: Theme.of(context).colorScheme.shadow,
+            ),
           ),
-          Text('Chat Sphere' , 
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            color: Theme.of(context).colorScheme.shadow
-          )),
         ],
       ),
       elevation: 5,

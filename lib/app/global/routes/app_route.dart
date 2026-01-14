@@ -7,16 +7,21 @@ import 'package:chat_app_fe/app/view/features/Login/ui/login_page.dart';
 import 'package:chat_app_fe/main.dart';
 part 'app_route.gr.dart';
 
-
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
-class AppRoute extends RootStackRouter{
-
-
+class AppRoute extends RootStackRouter {
   @override
   List<AutoRoute> routes = [
-    AutoRoute(page: LoginRoute.page , initial: true , path: '/' ),
+    AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
 
-      AutoRoute(page: HomeRoute.page , path: '/home' , guards: [Authguard(localstorage: getIt<Localstorage>(), authservice: getIt<Authservice>())]),
-  ] ;
-  
+    AutoRoute(
+      page: HomeRoute.page,
+      path: '/home',
+      guards: [
+        Authguard(
+          localstorage: getIt<Localstorage>(),
+          authservice: getIt<Authservice>(),
+        ),
+      ],
+    ),
+  ];
 }

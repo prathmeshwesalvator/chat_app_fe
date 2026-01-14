@@ -27,7 +27,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    bool _obscurePassword = true;
+    bool obscurePassword = true;
 
     final isDarkMode = theme.brightness == Brightness.dark;
 
@@ -119,7 +119,7 @@ class _LoginFormState extends State<LoginForm> {
                     // Password Field
                     TextFormField(
                       controller: widget.passwordController,
-                      obscureText: _obscurePassword,
+                      obscureText: obscurePassword,
                       textInputAction: TextInputAction.done,
                       style: TextStyle(
                         color: theme.colorScheme.onSurfaceVariant,
@@ -135,14 +135,14 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword
+                            obscurePassword
                                 ? Icons.visibility_off
                                 : Icons.visibility,
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                           onPressed: () {
                             setState(() {
-                              _obscurePassword = !_obscurePassword;
+                              obscurePassword = !obscurePassword;
                             });
                           },
                         ),
@@ -218,7 +218,9 @@ class _LoginFormState extends State<LoginForm> {
                                     widget.usernameController.text.trim(),
                                     widget.passwordController.text.trim(),
                                   );
+                                }
 
+                                if (state.loginStatus == Blocstatus.success) {
                                   context.router.push(HomeRoute());
                                 }
                               },

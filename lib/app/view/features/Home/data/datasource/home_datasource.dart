@@ -13,6 +13,8 @@ class HomeDatasourceImpl implements HomeDatasource {
   @override
   Future<CurrentUser> fetchUserProfile() async {
     try {
+
+
       final response = await homeService.fetchUserProfile();
 
       return response;

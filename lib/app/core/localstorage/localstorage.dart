@@ -1,23 +1,23 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Localstorage {
-  final FlutterSecureStorage pref;
+  final SharedPreferences pref;
 
   Localstorage({required this.pref});
 
   Future<String> getToken() async {
-    return await pref.read(key: 'accessToken') ?? '';
+    return pref.getString('accessToken') ?? '';
   }
 
-  Future<void> writeValue(String key,  value) async {
-    await pref.write(key: key, value: value);
+  Future<void> writeValue(String key, value) async {
+    await pref.setString(key, value);
   }
 
   Future<void> writeAccessToken(final String value) async {
-    await pref.write(key: 'accessToken', value: value);
+    await pref.setString('accessToken', value);
   }
 
   Future<void> writeRefreshToken(final String value) async {
-    await pref.write(key: 'refreshToken', value: value);
+    await pref.setString('refreshToken', value);
   }
 }

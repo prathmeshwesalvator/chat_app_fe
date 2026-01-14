@@ -11,15 +11,15 @@ import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repo
 import 'package:chat_app_fe/app/view/features/Login/data/service/login_service.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/repositories/login_repositories.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> setupLocator(GetIt getIt) async {
-  getIt.registerLazySingleton<FlutterSecureStorage>(
-    () => FlutterSecureStorage(),
-  );
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   getIt.registerLazySingleton<Localstorage>(
-    () => Localstorage(pref: getIt<FlutterSecureStorage>()),
+    () => Localstorage(pref: getIt<SharedPreferences>()),
   );
   getIt.registerLazySingleton<HomeUsecases>(
     () => HomeUsecasesImpl(homeRepositories: getIt<HomeRepositories>()),

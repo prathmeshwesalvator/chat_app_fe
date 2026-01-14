@@ -21,7 +21,7 @@ class _HomeService implements HomeService {
 
   @override
   Future<CurrentUser> fetchUserProfile() async {
-    final _extra = <String, dynamic>{'requestType': 'TYPE_A'};
+    final _extra = <String, dynamic>{'requestType': 'TYPE_E'};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

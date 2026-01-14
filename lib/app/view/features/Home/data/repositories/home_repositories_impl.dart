@@ -18,12 +18,14 @@ class HomeRepositoriesImpl implements HomeRepositories {
   @override
   Future<Either<Failure, CurrentUserEntities>> fetchUserProfile() async {
     try {
+
+   
       final response = await homeDatasource.fetchUserProfile();
 
-      localstorage.writeValue('username', response.username);
-      localstorage.writeValue('email', response.email);
-      localstorage.writeValue('userId', response.userId);
-      localstorage.writeValue('dateJoined', response.dateJoined);
+      await localstorage.writeValue('username', response.username);
+      await localstorage.writeValue('email', response.email);
+      await localstorage.writeValue('userId', response.userId);
+      await localstorage.writeValue('dateJoined', response.dateJoined);
 
       return Right(response.toDomain());
     } catch (e) {

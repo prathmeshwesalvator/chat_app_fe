@@ -18,17 +18,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     context.read<HomeCubit>().loadUserProfile();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
-      drawer: Drawer(
-        
-      ),
+      appBar: const CustomAppBar(),
+      drawer: const Drawer(),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state.profileStatus == Blocstatus.error) {
@@ -38,11 +35,11 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (state.profileStatus == Blocstatus.loading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (state.profileStatus == Blocstatus.success) {
-            return Text('state is success');
+            return const Text('state is success');
           }
 
           return const SizedBox();
