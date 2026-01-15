@@ -10,7 +10,7 @@ class IntToStringConverter implements JsonConverter<String?, int?> {
 
   @override
   int? toJson(String? object) {
-    int.tryParse(object.toString());
+    return int.tryParse(object.toString());
   }
   
 }

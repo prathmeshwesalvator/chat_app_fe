@@ -20,4 +20,8 @@ class Localstorage {
   Future<void> writeRefreshToken(final String value) async {
     await pref.setString('refreshToken', value);
   }
+
+  Future<String> readValue(final String key) async {
+    return pref.getString(key) ?? 'User';
+  }
 }

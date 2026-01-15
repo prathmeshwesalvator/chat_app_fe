@@ -98,7 +98,6 @@ class _CircularLogoState extends State<CircularLogo>
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _pulseAnimation;
-  late Animation<Color?> _colorAnimation;
   
   bool _isHovered = false;
   bool _isPressed = false;
@@ -185,7 +184,7 @@ class _CircularLogoState extends State<CircularLogo>
         ScaleTransition(
           scale: widget.pulseAnimation 
               ? _pulseAnimation 
-              : AlwaysStoppedAnimation(1.0),
+              : const AlwaysStoppedAnimation(1.0),
           child: Container(
             width: widget.size,
             height: widget.size,
@@ -277,7 +276,7 @@ class _CircularLogoState extends State<CircularLogo>
                   widget.size * 0.15,
                   -widget.size * 0.15,
                 ),
-                child: widget.badge!,
+                child: widget.badge,
               ),
             ),
           ),
@@ -398,12 +397,12 @@ class EnhancedLogoExample extends StatelessWidget {
             const SizedBox(height: 40),
             
             // Custom gradient logo
-            CircularLogo(
+            const CircularLogo(
               size: 100,
-              backgroundGradient: const LinearGradient(
+              backgroundGradient: LinearGradient(
                 colors: [Colors.purple, Colors.pink],
               ),
-              innerGradient: const LinearGradient(
+              innerGradient: LinearGradient(
                 colors: [Colors.blue, Colors.green],
               ),
               icon: Icons.settings,

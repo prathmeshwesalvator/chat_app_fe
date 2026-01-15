@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeCubit extends Cubit<HomeState> {
   final HomeUsecases homeUsecases;
 
-  HomeCubit({required this.homeUsecases}) : super(HomeState());
+  HomeCubit({required this.homeUsecases}) : super(const HomeState());
   void loadUserProfile() async {
     emit(state.copyWith(profileStatus: Blocstatus.loading));
 
@@ -22,7 +22,16 @@ class HomeCubit extends Cubit<HomeState> {
         );
       },
       (r) {
-        emit(state.copyWith(profileStatus: Blocstatus.success));
+        emit(
+          state.copyWith(
+            profileStatus: Blocstatus.success,
+            username: r.username,
+            userId: r.userId,
+            email: r.email,
+            dateJoined: r.dateJoined,
+            message: r.message,
+          ),
+        );
       },
     );
   }
