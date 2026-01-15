@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(
           state.copyWith(
             loginStatus: Blocstatus.error,
-            errorMessage: l.toString(),
+            errorMessage: l.errorMessage.toString(),
           ),
         );
       },

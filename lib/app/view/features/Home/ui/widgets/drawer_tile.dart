@@ -21,8 +21,6 @@ Widget drawerTile(
   );
 }
 
-
-
 Widget bottomNavTile(
   BuildContext context, {
   required IconData icon,
@@ -53,18 +51,10 @@ Widget bottomNavTile(
                 ),
               ],
             ),
-            child: Icon(
-              icon,
-              size: 32,
-              color: Colors.white,
-            ),
+            child: Icon(icon, size: 32, color: Colors.white),
           )
         else
-          Icon(
-            icon,
-            color: color ?? theme.colorScheme.primary,
-            size: 24,
-          ),
+          Icon(icon, color: color ?? theme.colorScheme.primary, size: 24),
         const SizedBox(height: 4),
         if (!isCenter)
           Text(

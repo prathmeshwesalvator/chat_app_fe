@@ -15,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -43,37 +42,48 @@ class _HomePageState extends State<HomePage> {
         },
       ),
 
-      body: BlocBuilder<HomeCubit, HomeState>(
-        buildWhen: (prev, curr) => prev.profileStatus != curr.profileStatus,
-        builder: (context, state) {
-          if (state.profileStatus == Blocstatus.loading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (state.profileStatus == Blocstatus.error) {
-            return Center(child: Text('Error: ${state.errorMessage}'));
-          }
-
-          if (state.profileStatus == Blocstatus.success) {
-            return const HomePageBody();
-          }
-
-          return const SizedBox.shrink();
-        },
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1200
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocBuilder<HomeCubit, HomeState>(
+              buildWhen: (prev, curr) => prev.profileStatus != curr.profileStatus,
+              builder: (context, state) {
+                if (state.profileStatus == Blocstatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+            
+                if (state.profileStatus == Blocstatus.error) {
+                  return Center(child: Text('Error: ${state.errorMessage}'));
+                }
+            
+                if (state.profileStatus == Blocstatus.success) {
+                  return const HomePageBody();
+                }
+            
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
       ),
 
-      floatingActionButton: isMobile(context)
-          ? FloatingActionButton(
+      floatingActionButton: isDesktop(context)
+          ? null
+          : FloatingActionButton(
+            isExtended: true,
               onPressed: () {},
               tooltip: 'Add Contact',
               elevation: 8,
               child: const Icon(Icons.add_outlined),
-            )
-          : null,
+            ),
 
       floatingActionButtonLocation: const CenterDockedWithOffset(-8),
 
-      bottomNavigationBar: isMobile(context) ? const CustomBottomNav() : null,
+      bottomNavigationBar: isDesktop(context) ? null : const CustomBottomNav(),
     );
   }
 }

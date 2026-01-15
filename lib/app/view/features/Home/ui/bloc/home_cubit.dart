@@ -35,4 +35,19 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void logOutUser() async {
+    emit(state.copyWith(logOutStatus: Blocstatus.loading));
+
+    final response = await homeUsecases.logOutUser();
+
+    response.fold(
+      (l) {
+        emit(state.copyWith(logOutStatus: Blocstatus.error));
+      },
+      (r) {
+        emit(state.copyWith(logOutStatus: Blocstatus.success, message: r));
+      },
+    );
+  }
 }

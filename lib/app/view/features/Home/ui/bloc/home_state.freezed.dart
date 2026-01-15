@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- String get message;@IntToStringConverter() String? get userId; String get username; String get email; String get dateJoined; Blocstatus? get profileStatus; String get errorMessage;
+ String get message;@IntToStringConverter() String? get userId; String get username; String get email; String get dateJoined; Blocstatus? get profileStatus; String get errorMessage; Blocstatus? get logOutStatus;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.message, message) || other.message == message)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.dateJoined, dateJoined) || other.dateJoined == dateJoined)&&(identical(other.profileStatus, profileStatus) || other.profileStatus == profileStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.message, message) || other.message == message)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.dateJoined, dateJoined) || other.dateJoined == dateJoined)&&(identical(other.profileStatus, profileStatus) || other.profileStatus == profileStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.logOutStatus, logOutStatus) || other.logOutStatus == logOutStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,userId,username,email,dateJoined,profileStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,message,userId,username,email,dateJoined,profileStatus,errorMessage,logOutStatus);
 
 @override
 String toString() {
-  return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage)';
+  return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- String message,@IntToStringConverter() String? userId, String username, String email, String dateJoined, Blocstatus? profileStatus, String errorMessage
+ String message,@IntToStringConverter() String? userId, String username, String email, String dateJoined, Blocstatus? profileStatus, String errorMessage, Blocstatus? logOutStatus
 });
 
 
@@ -62,7 +62,7 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? userId = freezed,Object? username = null,Object? email = null,Object? dateJoined = null,Object? profileStatus = freezed,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? userId = freezed,Object? username = null,Object? email = null,Object? dateJoined = null,Object? profileStatus = freezed,Object? errorMessage = null,Object? logOutStatus = freezed,}) {
   return _then(_self.copyWith(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -71,7 +71,8 @@ as String,email: null == email ? _self.email : email // ignore: cast_nullable_to
 as String,dateJoined: null == dateJoined ? _self.dateJoined : dateJoined // ignore: cast_nullable_to_non_nullable
 as String,profileStatus: freezed == profileStatus ? _self.profileStatus : profileStatus // ignore: cast_nullable_to_non_nullable
 as Blocstatus?,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,logOutStatus: freezed == logOutStatus ? _self.logOutStatus : logOutStatus // ignore: cast_nullable_to_non_nullable
+as Blocstatus?,
   ));
 }
 
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage,  Blocstatus? logOutStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage);case _:
+return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage,_that.logOutStatus);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.message,_that.userId,_that.username,_that.email,_that.date
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage,  Blocstatus? logOutStatus)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage);case _:
+return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage,_that.logOutStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.message,_that.userId,_that.username,_that.email,_that.date
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message, @IntToStringConverter()  String? userId,  String username,  String email,  String dateJoined,  Blocstatus? profileStatus,  String errorMessage,  Blocstatus? logOutStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage);case _:
+return $default(_that.message,_that.userId,_that.username,_that.email,_that.dateJoined,_that.profileStatus,_that.errorMessage,_that.logOutStatus);case _:
   return null;
 
 }
@@ -212,7 +213,7 @@ return $default(_that.message,_that.userId,_that.username,_that.email,_that.date
 
 
 class _HomeState implements HomeState {
-  const _HomeState({this.message = '', @IntToStringConverter() this.userId, this.username = '', this.email = '', this.dateJoined = '', this.profileStatus, this.errorMessage = ''});
+  const _HomeState({this.message = '', @IntToStringConverter() this.userId, this.username = '', this.email = '', this.dateJoined = '', this.profileStatus, this.errorMessage = '', this.logOutStatus});
   
 
 @override@JsonKey() final  String message;
@@ -222,6 +223,7 @@ class _HomeState implements HomeState {
 @override@JsonKey() final  String dateJoined;
 @override final  Blocstatus? profileStatus;
 @override@JsonKey() final  String errorMessage;
+@override final  Blocstatus? logOutStatus;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.message, message) || other.message == message)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.dateJoined, dateJoined) || other.dateJoined == dateJoined)&&(identical(other.profileStatus, profileStatus) || other.profileStatus == profileStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.message, message) || other.message == message)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.dateJoined, dateJoined) || other.dateJoined == dateJoined)&&(identical(other.profileStatus, profileStatus) || other.profileStatus == profileStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.logOutStatus, logOutStatus) || other.logOutStatus == logOutStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,userId,username,email,dateJoined,profileStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,message,userId,username,email,dateJoined,profileStatus,errorMessage,logOutStatus);
 
 @override
 String toString() {
-  return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage)';
+  return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- String message,@IntToStringConverter() String? userId, String username, String email, String dateJoined, Blocstatus? profileStatus, String errorMessage
+ String message,@IntToStringConverter() String? userId, String username, String email, String dateJoined, Blocstatus? profileStatus, String errorMessage, Blocstatus? logOutStatus
 });
 
 
@@ -270,7 +272,7 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? userId = freezed,Object? username = null,Object? email = null,Object? dateJoined = null,Object? profileStatus = freezed,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? userId = freezed,Object? username = null,Object? email = null,Object? dateJoined = null,Object? profileStatus = freezed,Object? errorMessage = null,Object? logOutStatus = freezed,}) {
   return _then(_HomeState(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -279,7 +281,8 @@ as String,email: null == email ? _self.email : email // ignore: cast_nullable_to
 as String,dateJoined: null == dateJoined ? _self.dateJoined : dateJoined // ignore: cast_nullable_to_non_nullable
 as String,profileStatus: freezed == profileStatus ? _self.profileStatus : profileStatus // ignore: cast_nullable_to_non_nullable
 as Blocstatus?,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,logOutStatus: freezed == logOutStatus ? _self.logOutStatus : logOutStatus // ignore: cast_nullable_to_non_nullable
+as Blocstatus?,
   ));
 }
 

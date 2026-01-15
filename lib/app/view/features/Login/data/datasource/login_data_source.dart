@@ -17,7 +17,8 @@ class LoginDataSourceImpl implements LoginDataSource {
 
       return response;
     } catch (e) {
-      throw Exception('An Error Occurred');
+
+      throw Exception('An Error Occurred $e');
     }
   }
 }

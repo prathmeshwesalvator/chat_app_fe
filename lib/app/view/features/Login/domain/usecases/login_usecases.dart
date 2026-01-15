@@ -20,7 +20,7 @@ class LoginUsecasesImpl implements LoginUsecases {
     final String username,
     final String password,
   ) async {
-    Map<String, dynamic> body = {'username': username, 'password': password};
+    final Map<String, dynamic> body = {'username': username, 'password': password};
 
     return await loginRepositories.loginUser(body);
   }

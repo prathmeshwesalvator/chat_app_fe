@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
+import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/utils/conversion_methods.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/drawer_tile.dart';
@@ -12,7 +15,6 @@ class CustomDrawer extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Drawer(
-
       child: Column(
         children: [
           Expanded(child: _buildHeader(theme, context)),
@@ -61,12 +63,10 @@ class CustomDrawer extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                'Joined By : ${ConversionMethods.formatDate(
-                  context.read<HomeCubit>().state.dateJoined,
-                )}',
+                'Joined By : ${ConversionMethods.formatDate(context.read<HomeCubit>().state.dateJoined)}',
                 style: theme.textTheme.bodySmall!.copyWith(
-                  fontStyle: FontStyle.italic
-                )
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
           ),
@@ -78,7 +78,15 @@ class CustomDrawer extends StatelessWidget {
             icon: Icons.logout,
             title: 'Logout',
             color: Colors.red,
-            onTap: () {},
+            onTap: () {
+              if (context.read<HomeCubit>().state.logOutStatus ==
+                  Blocstatus.loading) {
+                return;
+              }
+
+              context.read<HomeCubit>().logOutUser();
+              context.router.push(HomeRoute());
+            },
           ),
         ],
       ),

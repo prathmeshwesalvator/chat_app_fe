@@ -13,5 +13,8 @@ abstract class HomeState with _$HomeState {
     @Default('') String dateJoined,
     Blocstatus? profileStatus,
     @Default('') String errorMessage,
+    Blocstatus? logOutStatus,
   }) = _HomeState;
+
+  factory HomeState.initial() => const _HomeState();
 }

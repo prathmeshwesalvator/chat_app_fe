@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
 import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/shared_widgets/circular_logo.dart';
@@ -70,7 +71,9 @@ class _LoginPageState extends State<LoginPage>
             if (state.loginStatus == Blocstatus.error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.errorMessage),
+                  duration: 5.seconds,
+                  showCloseIcon: true,
+                  content: Text(state.errorMessage,),
                   backgroundColor: theme.colorScheme.error,
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
@@ -97,7 +100,7 @@ class _LoginPageState extends State<LoginPage>
   }
 
   Widget _buildGlassCard(ThemeData theme, Size size) {
-    bool isDesktop = size.width > 700;
+    final bool isDesktop = size.width > 700;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
@@ -123,7 +126,6 @@ class _LoginPageState extends State<LoginPage>
           child: isDesktop
               ? Row(
                   children: [
-                    // Left side: Animated Circular Logo + decoration
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +137,6 @@ class _LoginPageState extends State<LoginPage>
                               pulseDuration:
                                   const Duration(milliseconds: 500),
                               size: 200,
-                              icon: Icons.message,
                               shadowColor: theme.colorScheme.primary,
                             ),
                           ),
@@ -180,7 +181,6 @@ class _LoginPageState extends State<LoginPage>
                         pulseAnimation: true,
                         pulseDuration: const Duration(milliseconds: 500),
                         size: 180,
-                        icon: Icons.message,
                         shadowColor: theme.colorScheme.primary,
                       ),
                     ),

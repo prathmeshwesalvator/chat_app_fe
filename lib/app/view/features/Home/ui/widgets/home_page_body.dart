@@ -12,13 +12,13 @@ class HomePageBody extends StatefulWidget {
 class _HomePageBodyState extends State<HomePageBody> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        isMobile(context)
-            ? const SizedBox()
-            : const Expanded(child: RecentChatsList()),
-        const Expanded(flex: 3, child: Center(child: Text('Profile Loaded'))),
-      ],
-    );
+    return isDesktop(context)
+        ? const Row(
+            children: [
+              Expanded(child: RecentChatsList()),
+              Expanded(flex: 3, child: Center(child: Text('Profile Loaded'))),
+            ],
+          )
+        : const RecentChatsList();
   }
 }

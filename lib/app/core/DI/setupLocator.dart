@@ -22,7 +22,10 @@ Future<void> setupLocator(GetIt getIt) async {
     () => Localstorage(pref: getIt<SharedPreferences>()),
   );
   getIt.registerLazySingleton<HomeUsecases>(
-    () => HomeUsecasesImpl(homeRepositories: getIt<HomeRepositories>()),
+    () => HomeUsecasesImpl(
+      homeRepositories: getIt<HomeRepositories>(),
+      localstorage: getIt<Localstorage>(),
+    ),
   );
   getIt.registerLazySingleton<HomeRepositories>(
     () => HomeRepositoriesImpl(

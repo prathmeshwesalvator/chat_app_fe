@@ -1,3 +1,4 @@
+import 'package:chat_app_fe/app/view/features/Home/ui/widgets/chat_list.dart';
 import 'package:flutter/material.dart';
 
 class RecentChatsList extends StatefulWidget {
@@ -13,8 +14,10 @@ class _RecentChatsListState extends State<RecentChatsList> {
 
     final TextEditingController searchController = TextEditingController();
 
-    return  Column(children: [
-      Flexible(child: TextFormField(
+    return  Column(
+      spacing: 8,
+      children: [
+      TextFormField(
         controller: searchController,
         autofocus: true,
         cursorOpacityAnimates: true,
@@ -23,7 +26,10 @@ class _RecentChatsListState extends State<RecentChatsList> {
           labelText: 'Search' , 
           hintText: 'Enter Contact Name'
         ),
-      ))
+      ),
+
+
+      const ChatList()
     ]);
   }
 }
