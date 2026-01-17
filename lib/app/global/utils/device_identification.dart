@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
   }
 
   bool isTablet(BuildContext context) {
-    return MediaQuery.sizeOf(context).width > 425 &&
-            MediaQuery.sizeOf(context).width < 768
+    return MediaQuery.sizeOf(context).width >= 425 &&
+            MediaQuery.sizeOf(context).width <= 768
         ? true
         : false;
   }

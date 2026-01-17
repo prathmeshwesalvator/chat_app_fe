@@ -28,7 +28,7 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   icon: Icons.home_outlined,
                   title: 'Home',
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {},
                 ),
                 drawerTile(
                   context,
