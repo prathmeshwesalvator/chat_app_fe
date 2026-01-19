@@ -28,6 +28,7 @@ class AppRoute extends RootStackRouter {
     CustomRoute(
       page: HomeRoute.page,
       path: '/home',
+      // initial: true,
       guards: [
         Authguard(
           localstorage: getIt<Localstorage>(),

@@ -27,76 +27,89 @@ class _CustomSideBarState extends State<CustomSideBar> {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         border: Border(
-          right: BorderSide(
-            color: theme.dividerColor.withOpacity(0.2),
-          ),
-          left: BorderSide(
-            color: theme.dividerColor.withOpacity(0.2),
-          ),
-          
+          right: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
+          left: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
         ),
       ),
       child: SafeArea(
-        child: Column(
-          children: [
+        child: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
+
+          cacheExtent: 600,
+          slivers: <Widget>[
             /// 🔍 Search Bar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CustomSearchBar(
-                searchController: _searchController,
-                onChanged: (value) {
-                },
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CustomSearchBar(
+                  searchController: _searchController,
+                  onChanged: (value) {},
+                ),
               ),
             ),
 
-            Divider(
-              height: 1,
-              color: theme.dividerColor.withOpacity(0.2),
+            SliverToBoxAdapter(
+              child: Divider(
+                height: 1,
+                color: theme.dividerColor.withOpacity(0.2),
+              ),
             ),
 
             /// Section Title
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-              child: Row(
-                children: [
-                  Text(
-                    'Chats',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.colorScheme.onSurface,
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                child: Row(
+                  children: [
+                    Text(
+                      'Chats',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Icons.chat_bubble_outline,
-                    size: 18,
-                    color:
-                        theme.colorScheme.onSurface.withOpacity(0.6),
-                  ),
-                ],
+                    const Spacer(),
+                    Icon(
+                      Icons.chat_bubble_outline,
+                      size: 18,
+                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                    ),
+                  ],
+                ),
               ),
             ),
 
             /// Chat List
-            Expanded(
-              child: ListView.builder(
-                itemExtent: 60,
-                cacheExtent: 60,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                physics: const BouncingScrollPhysics(),
-
-                itemCount: 600,
-                itemBuilder: (context, index) {
-                  return RepaintBoundary(
-                    child: ChatTile(
-                      name: 'User $index',
-                      lastMessage: 'Last message preview...',
-                      time: '12:${index}0 PM',
-                    ),
-                  );
-                },
-              ),
+            SliverFixedExtentList(
+              itemExtent: 60,
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return RepaintBoundary(
+                  child: ChatTile(
+                    name: 'User $index',
+                    lastMessage: 'Last message preview...',
+                    time: '12:${index}0 PM',
+                  ),
+                );
+              }, childCount: 600),
             ),
+
+            // ListView.builder(
+            //   itemExtent: 60,
+            //   cacheExtent: 60,
+            //   padding: const EdgeInsets.symmetric(horizontal: 8),
+            //   physics: const BouncingScrollPhysics(),
+
+            //   itemCount: 600,
+            //   itemBuilder: (context, index) {
+            //     return RepaintBoundary(
+            //       child: ChatTile(
+            //         name: 'User $index',
+            //         lastMessage: 'Last message preview...',
+            //         time: '12:${index}0 PM',
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

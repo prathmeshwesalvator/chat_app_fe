@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoginCubit(loginUsecases: getIt<LoginUsecases>()))
       ],
       child: MaterialApp.router(
+        // showPerformanceOverlay: true,
         title: 'Flutter Demo',
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,

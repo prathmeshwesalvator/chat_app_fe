@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         'Chat Sphere',
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           fontWeight: FontWeight.w600,
-          color: Theme.of(context).colorScheme.surface
+          color: Theme.of(context).colorScheme.surface,
         ),
       ),
 
@@ -33,15 +33,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         /// Desktop Avatar → Drawer
         if (isDesktop(context))
           IconButton(
-            icon: const CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person),
+            icon: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              child: Icon(
+                Icons.person,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             onPressed: () {
               scaffoldKey.currentState?.openEndDrawer();
             },
           )
-
         /// Mobile Popup Menu
         else
           PopupMenuButton<AppBarMenu>(
@@ -88,10 +90,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     Icon(Icons.logout_outlined, color: Colors.red),
                     SizedBox(width: 10),
-                    Text(
-                      'Log Out',
-                      style: TextStyle(color: Colors.red),
-                    ),
+                    Text('Log Out', style: TextStyle(color: Colors.red)),
                   ],
                 ),
               ),

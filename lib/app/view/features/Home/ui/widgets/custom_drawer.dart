@@ -22,39 +22,41 @@ class CustomDrawer extends StatelessWidget {
           // ---------------- MENU ITEMS ----------------
           Expanded(
             flex: 2,
-            child: ListView(
-              children: [
-                drawerTile(
-                  context,
-                  icon: Icons.home_outlined,
-                  title: 'Home',
-                  onTap: () {},
-                ),
-                drawerTile(
-                  context,
-                  icon: Icons.person_outline,
-                  title: 'Profile',
-                  onTap: () {},
-                ),
-                drawerTile(
-                  context,
-                  icon: Icons.add_box_rounded,
-                  title: 'Add Contact',
-                  onTap: () {},
-                ),
-                drawerTile(
-                  context,
-                  icon: Icons.qr_code_2_outlined,
-                  title: 'Show QR',
-                  onTap: () {},
-                ),
-                drawerTile(
-                  context,
-                  icon: Icons.settings_outlined,
-                  title: 'Settings',
-                  onTap: () {},
-                ),
-              ],
+            child: RepaintBoundary(
+              child: ListView(
+                children: [
+                  drawerTile(
+                    context,
+                    icon: Icons.home_outlined,
+                    title: 'Home',
+                    onTap: () {},
+                  ),
+                  drawerTile(
+                    context,
+                    icon: Icons.person_outline,
+                    title: 'Profile',
+                    onTap: () {},
+                  ),
+                  drawerTile(
+                    context,
+                    icon: Icons.add_box_rounded,
+                    title: 'Add Contact',
+                    onTap: () {},
+                  ),
+                  drawerTile(
+                    context,
+                    icon: Icons.qr_code_2_outlined,
+                    title: 'Show QR',
+                    onTap: () {},
+                  ),
+                  drawerTile(
+                    context,
+                    icon: Icons.settings_outlined,
+                    title: 'Settings',
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
 
