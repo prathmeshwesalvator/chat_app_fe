@@ -3,12 +3,14 @@ import 'package:chat_app_fe/app/core/auth/authguard.dart';
 import 'package:chat_app_fe/app/core/auth/authservice.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/home_page.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/pages/add_contacts_page.dart';
+import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_desktop.dart';
+import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_mobile.dart';
+import 'package:chat_app_fe/app_shell_page.dart';
+import 'package:chat_app_fe/app/view/features/Contacts/ui/add_contacts_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_tab_page.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/pages/profile_page.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/pages/settings_page.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/pages/show_qr_page.dart';
+import 'package:chat_app_fe/app/view/features/Profile/ui/profile_page.dart';
+import 'package:chat_app_fe/app/view/features/Settings/ui/settings_page.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/show_qr_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/login_page.dart';
 import 'package:chat_app_fe/main.dart';
 part 'app_route.gr.dart';
@@ -26,9 +28,8 @@ class AppRoute extends RootStackRouter {
     ),
 
     CustomRoute(
-      page: HomeRoute.page,
+      page: AppShellRoute.page,
       path: '/home',
-      // initial: true,
       guards: [
         Authguard(
           localstorage: getIt<Localstorage>(),

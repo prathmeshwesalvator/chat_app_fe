@@ -57,7 +57,6 @@ class CustomBottomNav extends StatelessWidget {
               pulseAnimation: true,
               pulseDuration: 30.seconds,
               ) 
-            // _centerButton(context),
           ),
 
 

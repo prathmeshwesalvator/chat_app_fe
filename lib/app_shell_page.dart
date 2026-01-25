@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class AppShellPage extends StatefulWidget {
+  const AppShellPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AppShellPage> createState() => _AppShellPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AppShellPageState extends State<AppShellPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -41,7 +41,10 @@ class _HomePageState extends State<HomePage> {
 
         return Scaffold(
           key: scaffoldKey,
-          appBar: CustomAppBar(scaffoldKey: scaffoldKey),
+          appBar: CustomAppBar(
+            scaffoldKey: scaffoldKey,
+            index: AutoTabsRouter.of(context).activeIndex,
+          ),
 
           endDrawer: isDesktop(context) ? const CustomDrawer() : null,
 

@@ -44,7 +44,7 @@ class _LoginPageDesktopState extends State<LoginPageDesktop> {
       body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state.loginStatus == Blocstatus.success) {
-            context.router.replaceAll([const HomeRoute()]);
+            context.router.replaceAll([const AppShellRoute()]);
           }
 
           if (state.loginStatus == Blocstatus.error) {

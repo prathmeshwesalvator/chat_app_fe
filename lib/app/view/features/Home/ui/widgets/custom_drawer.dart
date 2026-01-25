@@ -87,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
               }
 
               context.read<HomeCubit>().logOutUser();
-              context.router.push(HomeRoute());
+              context.router.push(const LoginRoute());
             },
           ),
         ],

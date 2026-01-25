@@ -27,17 +27,17 @@ class AddContactsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
+/// [AppShellPage]
+class AppShellRoute extends PageRouteInfo<void> {
+  const AppShellRoute({List<PageRouteInfo>? children})
+    : super(AppShellRoute.name, initialChildren: children);
 
-  static const String name = 'HomeRoute';
+  static const String name = 'AppShellRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomePage();
+      return const AppShellPage();
     },
   );
 }
@@ -70,6 +70,38 @@ class LoginRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const LoginPage();
+    },
+  );
+}
+
+/// generated route for
+/// [LoginPageDesktop]
+class LoginRouteDesktop extends PageRouteInfo<void> {
+  const LoginRouteDesktop({List<PageRouteInfo>? children})
+    : super(LoginRouteDesktop.name, initialChildren: children);
+
+  static const String name = 'LoginRouteDesktop';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LoginPageDesktop();
+    },
+  );
+}
+
+/// generated route for
+/// [LoginPageMobile]
+class LoginRouteMobile extends PageRouteInfo<void> {
+  const LoginRouteMobile({List<PageRouteInfo>? children})
+    : super(LoginRouteMobile.name, initialChildren: children);
+
+  static const String name = 'LoginRouteMobile';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LoginPageMobile();
     },
   );
 }

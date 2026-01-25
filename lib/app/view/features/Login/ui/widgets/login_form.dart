@@ -220,7 +220,7 @@ class _LoginFormState extends State<LoginForm> {
                                 }
 
                                 if (state.loginStatus == Blocstatus.success) {
-                                  context.router.push(HomeRoute());
+                                  context.router.push(const AppShellRoute());
                                 }
                               },
                         child: state.loginStatus == Blocstatus.loading

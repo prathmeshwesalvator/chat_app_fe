@@ -8,13 +8,88 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 enum AppBarMenu { theme, logout }
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.scaffoldKey});
+  const CustomAppBar({
+    super.key,
+    required this.scaffoldKey,
+    required this.index,
+  });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final index;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final appBarTitle = 'Chat Sphere';
+    final actionList = <Widget>[
+      if (isDesktop(context))
+        IconButton(
+          icon: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            child: Icon(
+              Icons.person,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          onPressed: () {
+            scaffoldKey.currentState?.openEndDrawer();
+          },
+        )
+      else
+        PopupMenuButton<AppBarMenu>(
+          icon: CircleAvatar(
+            backgroundColor: theme.colorScheme.surface,
+            child: Icon(Icons.person_outline, color: theme.colorScheme.primary),
+          ),
+
+          onSelected: (value) {
+            switch (value) {
+              case AppBarMenu.theme:
+                // TODO: Toggle theme
+                break;
+
+              case AppBarMenu.logout:
+                context.read<HomeCubit>().logOutUser();
+
+                /// Delay navigation until menu closes
+                Future.microtask(() {
+                  context.router.replace(const LoginRoute());
+                });
+                break;
+            }
+          },
+
+          itemBuilder: (_) => [
+            const PopupMenuItem(
+              value: AppBarMenu.theme,
+              child: Row(
+                children: [
+                  Icon(Icons.nightlight),
+                  SizedBox(width: 10),
+                  Text('Theme'),
+                ],
+              ),
+            ),
+            const PopupMenuDivider(),
+            const PopupMenuItem(
+              value: AppBarMenu.logout,
+              child: Row(
+                children: [
+                  Icon(Icons.logout_outlined, color: Colors.red),
+                  SizedBox(width: 10),
+                  Text('Log Out', style: TextStyle(color: Colors.red)),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+      const SizedBox(width: 8),
+    ];
+
+    switch (index) {
+      case 0:
+    }
 
     return AppBar(
       automaticallyImplyLeading: false,
@@ -22,83 +97,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: theme.colorScheme.primary,
 
       title: Text(
-        'Chat Sphere',
+        appBarTitle,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           fontWeight: FontWeight.w600,
           color: Theme.of(context).colorScheme.surface,
         ),
       ),
 
-      actions: [
-        /// Desktop Avatar → Drawer
-        if (isDesktop(context))
-          IconButton(
-            icon: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              child: Icon(
-                Icons.person,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            onPressed: () {
-              scaffoldKey.currentState?.openEndDrawer();
-            },
-          )
-        /// Mobile Popup Menu
-        else
-          PopupMenuButton<AppBarMenu>(
-            icon: CircleAvatar(
-              backgroundColor: theme.colorScheme.surface,
-              child: Icon(
-                Icons.person_outline,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-
-            onSelected: (value) {
-              switch (value) {
-                case AppBarMenu.theme:
-                  // TODO: Toggle theme
-                  break;
-
-                case AppBarMenu.logout:
-                  context.read<HomeCubit>().logOutUser();
-
-                  /// Delay navigation until menu closes
-                  Future.microtask(() {
-                    context.router.replace(const LoginRoute());
-                  });
-                  break;
-              }
-            },
-
-            itemBuilder: (_) => [
-              const PopupMenuItem(
-                value: AppBarMenu.theme,
-                child: Row(
-                  children: [
-                    Icon(Icons.nightlight),
-                    SizedBox(width: 10),
-                    Text('Theme'),
-                  ],
-                ),
-              ),
-              const PopupMenuDivider(),
-              const PopupMenuItem(
-                value: AppBarMenu.logout,
-                child: Row(
-                  children: [
-                    Icon(Icons.logout_outlined, color: Colors.red),
-                    SizedBox(width: 10),
-                    Text('Log Out', style: TextStyle(color: Colors.red)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-        const SizedBox(width: 8),
-      ],
+      actions: actionList,
     );
   }
 
