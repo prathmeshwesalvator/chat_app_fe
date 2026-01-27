@@ -11,7 +11,7 @@ abstract class LoginService {
 
   factory LoginService(Dio dio) = _LoginService;
 
-  @POST('/auth/token/')
+  @POST('/token/')
   @RequestAnnotations.requestTypeC
   Future<LoginModel> loginUser (
     @Body() Map<String , dynamic> body 

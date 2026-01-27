@@ -30,7 +30,7 @@ class _LoginService implements LoginService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/auth/token/',
+            '/token/',
             queryParameters: queryParameters,
             data: _data,
           )

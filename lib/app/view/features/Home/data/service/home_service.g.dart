@@ -29,7 +29,7 @@ class _HomeService implements HomeService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/auth/me/',
+            '/me/',
             queryParameters: queryParameters,
             data: _data,
           )

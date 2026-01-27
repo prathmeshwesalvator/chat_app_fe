@@ -8,7 +8,7 @@ part 'home_service.g.dart';
 abstract class HomeService {
   factory HomeService(Dio dio) = _HomeService;
 
-  @GET('/auth/me/')
+  @GET('/me/')
   @RequestAnnotations.requestTypeE
   Future<CurrentUser> fetchUserProfile();
 }
