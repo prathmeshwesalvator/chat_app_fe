@@ -5,6 +5,8 @@ import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/bloc/login_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/usecases/contact_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => HomeCubit(homeUsecases: getIt<HomeUsecases>()),
         ),
-        BlocProvider(create: (_) => LoginCubit(loginUsecases: getIt<LoginUsecases>()))
+        BlocProvider(create: (_) => LoginCubit(loginUsecases: getIt<LoginUsecases>())),
+        BlocProvider(create: (_) => ContactsBloc(contactUsecases: getIt<ContactUsecases>()))
       ],
       child: MaterialApp.router(
         // showPerformanceOverlay: true,

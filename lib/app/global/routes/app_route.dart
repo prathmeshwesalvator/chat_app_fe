@@ -8,7 +8,7 @@ import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_mobile.d
 import 'package:chat_app_fe/app_shell_page.dart';
 import 'package:chat_app_fe/app/view/features/Contacts/ui/add_contacts_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_tab_page.dart';
-import 'package:chat_app_fe/app/view/features/Profile/ui/profile_page.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/contacts_page.dart';
 import 'package:chat_app_fe/app/view/features/Settings/ui/settings_page.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/show_qr_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/login_page.dart';
@@ -44,10 +44,10 @@ class AppRoute extends RootStackRouter {
           path: '',
         ),
         CustomRoute(
-          page: ProfileRoute.page,
+          page: ContactsRoute.page,
           duration: 300.milliseconds,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          path: 'profile',
+          path: 'contacts',
         ),
           CustomRoute(
           page: AddContactsRoute.page,

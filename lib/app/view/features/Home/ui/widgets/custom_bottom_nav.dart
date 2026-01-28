@@ -43,8 +43,8 @@ class CustomBottomNav extends StatelessWidget {
           ),
           _navItem(
             context,
-            icon: Icons.person_rounded,
-            label: 'Profile',
+            icon: Icons.contacts_outlined,
+            label: 'Contacts',
             index: 1,
           ),
 

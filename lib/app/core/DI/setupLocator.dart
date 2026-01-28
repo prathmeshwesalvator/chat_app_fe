@@ -11,6 +11,11 @@ import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repo
 import 'package:chat_app_fe/app/view/features/Login/data/service/login_service.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/repositories/login_repositories.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/datasource%20/contacts_datasource.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/repositories/contact_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/service/contacts_service.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/repositories/contact_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/usecases/contact_usecases.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,7 +60,22 @@ Future<void> setupLocator(GetIt getIt) async {
   getIt.registerLazySingleton<Authservice>(
     () => Authservice(getIt<DioInstance>().dio),
   );
+  getIt.registerLazySingleton<ContactsService>(
+    () => ContactsService(getIt<DioInstance>().dio),
+  );
+  getIt.registerLazySingleton<ContactsDatasource>(
+    () => ContactsDatasourceImpl(contactsService: getIt<ContactsService>()),
+  );
+  getIt.registerLazySingleton<ContactRepositories>(
+    () => ContactRepositoriesImpl(
+      contactsDatasource: getIt<ContactsDatasource>(),
+    ),
+  );
   getIt.registerLazySingleton<LoginUsecases>(
     () => LoginUsecasesImpl(loginRepositories: getIt<LoginRepositories>()),
+  );
+  getIt.registerLazySingleton<ContactUsecases>(
+    () =>
+        ContactUsecasesImpl(contactRepositories: getIt<ContactRepositories>()),
   );
 }

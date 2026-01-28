@@ -31,7 +31,7 @@ class _AppShellPageState extends State<AppShellPage> {
     return AutoTabsRouter(
       routes: const [
         HomeTabRoute(),
-        ProfileRoute(),
+        ContactsRoute(),
         AddContactsRoute(),
         ShowQrRoute(),
         SettingsRoute(),
