@@ -4,7 +4,7 @@ import 'package:chat_app_fe/app/view/features/Login/ui/bloc/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit({required this.loginUsecases}) : super(LoginState());
+  LoginCubit({required this.loginUsecases}) : super(const LoginState());
 
   final LoginUsecases loginUsecases;
 

@@ -104,33 +104,4 @@ class CustomBottomNav extends StatelessWidget {
     );
   }
 
-  Widget _centerButton(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      height: 64,
-      width: 64,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [
-            theme.colorScheme.primary,
-            theme.colorScheme.primaryContainer,
-          ],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.primary.withOpacity(0.35),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
-      child: const Icon(
-        Icons.add_rounded,
-        color: Colors.white,
-        size: 30,
-      ),
-    );
-  }
 }

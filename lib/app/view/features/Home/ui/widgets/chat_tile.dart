@@ -18,7 +18,6 @@ class ChatTile extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: () {
-        // TODO: open chat
       },
       child: Padding(
         padding: const EdgeInsets.all(10),

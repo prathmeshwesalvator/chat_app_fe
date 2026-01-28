@@ -255,7 +255,7 @@ class _LoginFormState extends State<LoginForm> {
                                     ),
                                   ),
                                   const SizedBox(width: 8),
-                                  Icon(Icons.arrow_right, size: 20),
+                                  const Icon(Icons.arrow_right, size: 20),
                                 ],
                               ),
                       ),

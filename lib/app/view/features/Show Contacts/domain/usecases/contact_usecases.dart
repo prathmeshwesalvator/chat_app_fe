@@ -12,6 +12,7 @@ class ContactUsecasesImpl implements ContactUsecases {
 
   ContactUsecasesImpl({required this.contactRepositories});
 
+  @override
   Future<Either<Failure, List<ContactEntities>>> fetchContacts() async {
     return await contactRepositories.fetchContacts();
   }

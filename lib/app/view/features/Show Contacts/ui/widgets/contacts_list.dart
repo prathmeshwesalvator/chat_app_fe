@@ -33,6 +33,5 @@ class _ContactsListState extends State<ContactsList> {
         );
       },
     );
-    ;
   }
 }

@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final index;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onSelected: (value) {
             switch (value) {
               case AppBarMenu.theme:
-                // TODO: Toggle theme
                 break;
 
               case AppBarMenu.logout:
