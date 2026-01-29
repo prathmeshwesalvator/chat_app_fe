@@ -11,6 +11,11 @@ import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repo
 import 'package:chat_app_fe/app/view/features/Login/data/service/login_service.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/repositories/login_repositories.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/datasource/qr_datasource.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/repositories/qr_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/service/qr_analysis_service.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/domain/repositories/qr_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/domain/usecases/qr_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/datasource%20/contacts_datasource.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/repositories/contact_repositories_impl.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/service/contacts_service.dart';
@@ -77,5 +82,17 @@ Future<void> setupLocator(GetIt getIt) async {
   getIt.registerLazySingleton<ContactUsecases>(
     () =>
         ContactUsecasesImpl(contactRepositories: getIt<ContactRepositories>()),
+  );
+  getIt.registerLazySingleton<QrAnalysisService>(
+    () => QrAnalysisService(getIt<DioInstance>().dio),
+  );
+  getIt.registerLazySingleton<QrDatasource>(
+    () => QrDatasourceImpl(qrAnalysisService: getIt<QrAnalysisService>()),
+  );
+  getIt.registerLazySingleton<QrRepositories>(
+    () => QrRepositoriesIMmpl(qrDatasource: getIt<QrDatasource>()),
+  );
+  getIt.registerLazySingleton<QrUsecases>(
+    () => QrUsecasesImpl(qrRepositories: getIt<QrRepositories>()),
   );
 }
