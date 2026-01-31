@@ -14,7 +14,7 @@ part of 'app_route.dart';
 /// [AddContactsPage]
 class AddContactsRoute extends PageRouteInfo<void> {
   const AddContactsRoute({List<PageRouteInfo>? children})
-    : super(AddContactsRoute.name, initialChildren: children);
+      : super(AddContactsRoute.name, initialChildren: children);
 
   static const String name = 'AddContactsRoute';
 
@@ -30,7 +30,7 @@ class AddContactsRoute extends PageRouteInfo<void> {
 /// [AppShellPage]
 class AppShellRoute extends PageRouteInfo<void> {
   const AppShellRoute({List<PageRouteInfo>? children})
-    : super(AppShellRoute.name, initialChildren: children);
+      : super(AppShellRoute.name, initialChildren: children);
 
   static const String name = 'AppShellRoute';
 
@@ -46,7 +46,7 @@ class AppShellRoute extends PageRouteInfo<void> {
 /// [ContactsPage]
 class ContactsRoute extends PageRouteInfo<void> {
   const ContactsRoute({List<PageRouteInfo>? children})
-    : super(ContactsRoute.name, initialChildren: children);
+      : super(ContactsRoute.name, initialChildren: children);
 
   static const String name = 'ContactsRoute';
 
@@ -62,7 +62,7 @@ class ContactsRoute extends PageRouteInfo<void> {
 /// [HomeTabPage]
 class HomeTabRoute extends PageRouteInfo<void> {
   const HomeTabRoute({List<PageRouteInfo>? children})
-    : super(HomeTabRoute.name, initialChildren: children);
+      : super(HomeTabRoute.name, initialChildren: children);
 
   static const String name = 'HomeTabRoute';
 
@@ -78,7 +78,7 @@ class HomeTabRoute extends PageRouteInfo<void> {
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
-    : super(LoginRoute.name, initialChildren: children);
+      : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
@@ -94,7 +94,7 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [LoginPageDesktop]
 class LoginRouteDesktop extends PageRouteInfo<void> {
   const LoginRouteDesktop({List<PageRouteInfo>? children})
-    : super(LoginRouteDesktop.name, initialChildren: children);
+      : super(LoginRouteDesktop.name, initialChildren: children);
 
   static const String name = 'LoginRouteDesktop';
 
@@ -110,7 +110,7 @@ class LoginRouteDesktop extends PageRouteInfo<void> {
 /// [LoginPageMobile]
 class LoginRouteMobile extends PageRouteInfo<void> {
   const LoginRouteMobile({List<PageRouteInfo>? children})
-    : super(LoginRouteMobile.name, initialChildren: children);
+      : super(LoginRouteMobile.name, initialChildren: children);
 
   static const String name = 'LoginRouteMobile';
 
@@ -126,7 +126,7 @@ class LoginRouteMobile extends PageRouteInfo<void> {
 /// [SettingsPage]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
-    : super(SettingsRoute.name, initialChildren: children);
+      : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
@@ -142,7 +142,7 @@ class SettingsRoute extends PageRouteInfo<void> {
 /// [ShowQrPage]
 class ShowQrRoute extends PageRouteInfo<void> {
   const ShowQrRoute({List<PageRouteInfo>? children})
-    : super(ShowQrRoute.name, initialChildren: children);
+      : super(ShowQrRoute.name, initialChildren: children);
 
   static const String name = 'ShowQrRoute';
 

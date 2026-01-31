@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/core/auth/authguard.dart';
 import 'package:chat_app_fe/app/core/auth/authservice.dart';
+import 'package:chat_app_fe/app/core/auth/guestguard.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_desktop.dart';
@@ -25,6 +26,7 @@ class AppRoute extends RootStackRouter {
       path: '/login',
       transitionsBuilder: TransitionsBuilders.slideRightWithFade,
       duration: 300.milliseconds,
+      guards: [Guestguard(localstorage: getIt<Localstorage>())],
     ),
 
     CustomRoute(
@@ -42,32 +44,50 @@ class AppRoute extends RootStackRouter {
           duration: 300.milliseconds,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
           path: '',
+          guards: [
+            Authguard(
+              localstorage: getIt<Localstorage>(),
+              authservice: getIt<Authservice>(),
+            ),
+          ],
         ),
         CustomRoute(
           page: ContactsRoute.page,
           duration: 300.milliseconds,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
           path: 'contacts',
+          guards: [
+            Authguard(
+              localstorage: getIt<Localstorage>(),
+              authservice: getIt<Authservice>(),
+            ),
+          ],
         ),
-          CustomRoute(
-          page: AddContactsRoute.page,
-          duration: 300.milliseconds,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          path: 'add-contacts',
-        ),
-          CustomRoute(
+
+        CustomRoute(
           page: ShowQrRoute.page,
           duration: 300.milliseconds,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
           path: 'show-qr',
+          guards: [
+            Authguard(
+              localstorage: getIt<Localstorage>(),
+              authservice: getIt<Authservice>(),
+            ),
+          ],
         ),
-          CustomRoute(
+        CustomRoute(
           page: SettingsRoute.page,
           duration: 300.milliseconds,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
           path: 'settings',
+          guards: [
+            Authguard(
+              localstorage: getIt<Localstorage>(),
+              authservice: getIt<Authservice>(),
+            ),
+          ],
         ),
-        
       ],
       transitionsBuilder: TransitionsBuilders.slideRightWithFade,
       duration: 300.milliseconds,

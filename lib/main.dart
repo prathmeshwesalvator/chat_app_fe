@@ -1,4 +1,4 @@
-import 'package:chat_app_fe/app/core/DI/setupLocator.dart';
+import 'package:chat_app_fe/app/core/di/setupLocator.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/theme/app_theme.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
@@ -17,6 +17,7 @@ final getIt = GetIt.asNewInstance();
 final appRoute = AppRoute();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await setupLocator(getIt);
   runApp(const MyApp());
 }

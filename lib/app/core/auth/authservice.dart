@@ -3,10 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'authservice.g.dart';
 
+
 @RestApi()
 abstract class Authservice {
 
-  factory Authservice(Dio dio) =_Authservice;
+  factory Authservice(Dio dio) = _Authservice;
 
   @GET('/auth/check/')
   @RequestAnnotations.requestTypeE

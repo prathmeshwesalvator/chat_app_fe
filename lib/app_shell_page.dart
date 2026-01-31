@@ -32,7 +32,6 @@ class _AppShellPageState extends State<AppShellPage> {
       routes: const [
         HomeTabRoute(),
         ContactsRoute(),
-        AddContactsRoute(),
         ShowQrRoute(),
         SettingsRoute(),
       ],

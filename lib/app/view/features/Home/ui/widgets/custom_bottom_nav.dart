@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
-import 'package:chat_app_fe/app/global/shared_widgets/circular_logo.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNav extends StatelessWidget {
@@ -48,16 +46,16 @@ class CustomBottomNav extends StatelessWidget {
             index: 1,
           ),
 
-          BottomNavigationBarItem(
-            label: 'Add',
-            icon: CircularLogo(
-              size: 64,
+          // BottomNavigationBarItem(
+          //   label: 'Add',
+          //   icon: CircularLogo(
+          //     size: 64,
           
-              icon: Icons.add_outlined,
-              pulseAnimation: true,
-              pulseDuration: 30.seconds,
-              ) 
-          ),
+          //     icon: Icons.add_outlined,
+          //     pulseAnimation: true,
+          //     pulseDuration: 30.seconds,
+          //     ) 
+          // ),
 
 
           _navItem(

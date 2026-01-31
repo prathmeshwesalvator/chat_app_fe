@@ -7,14 +7,13 @@ part of 'current_user.dart';
 // **************************************************************************
 
 _CurrentUser _$CurrentUserFromJson(Map<String, dynamic> json) => _CurrentUser(
-  message: json['message'] as String? ?? '',
-  userId: const IntToStringConverter().fromJson(
-    (json['userId'] as num?)?.toInt(),
-  ),
-  username: json['username'] as String? ?? '',
-  email: json['email'] as String? ?? '',
-  dateJoined: json['dateJoined'] as String? ?? '',
-);
+      message: json['message'] as String? ?? '',
+      userId: const IntToStringConverter()
+          .fromJson((json['userId'] as num?)?.toInt()),
+      username: json['username'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      dateJoined: json['dateJoined'] as String? ?? '',
+    );
 
 Map<String, dynamic> _$CurrentUserToJson(_CurrentUser instance) =>
     <String, dynamic>{

@@ -23,7 +23,7 @@ class QrBloc extends Bloc<QrEvent, QrState> {
           );
         },
         (r) {
-          emit(state.copyWith(qrStatus: Blocstatus.loading, qrData: r));
+          emit(state.copyWith(qrStatus: Blocstatus.success, qrData: r));
         },
       );
     });
