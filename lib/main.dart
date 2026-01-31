@@ -1,6 +1,7 @@
 import 'package:chat_app_fe/app/core/di/setupLocator.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/theme/app_theme.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_socket_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
 import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => HomeCubit(homeUsecases: getIt<HomeUsecases>()),
+          create: (_) => HomeCubit(homeUsecases: getIt<HomeUsecases>(), homeSocketUsecases: getIt<HomeSocketUsecases>()),
         ),
         BlocProvider(create: (_) => LoginCubit(loginUsecases: getIt<LoginUsecases>())),
         BlocProvider(create: (_) => ContactsBloc(contactUsecases: getIt<ContactUsecases>())),

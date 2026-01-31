@@ -1,4 +1,6 @@
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageInput extends StatefulWidget {
   const MessageInput({super.key, required this.messageController});
@@ -19,6 +21,14 @@ class _MessageInputState extends State<MessageInput> {
         hasText = widget.messageController.text.trim().isNotEmpty;
       });
     });
+  }
+
+  void sendMessage(String message) {
+    final senderId =
+        int.tryParse(context.read<HomeCubit>().state.userId ?? '') ?? 0;
+    context
+        .read<HomeCubit>()
+        .sendMessage(message: message, receiver: 2, sender: senderId);
   }
 
   @override
@@ -101,7 +111,12 @@ class _MessageInputState extends State<MessageInput> {
                     size: 20,
                     color: theme.colorScheme.onPrimary,
                   ),
-                  onPressed: hasText ? () {} : null,
+                  onPressed: hasText
+                      ? () {
+                          sendMessage(widget.messageController.text);
+                          widget.messageController.clear();
+                        }
+                      : null,
                 ),
               ),
             ),

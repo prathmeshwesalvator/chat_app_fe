@@ -1,10 +1,15 @@
 import 'package:chat_app_fe/app/core/auth/authservice.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/dio_instance.dart';
+import 'package:chat_app_fe/app/core/networking/websockets/websocket_manager.dart';
+import 'package:chat_app_fe/app/core/networking/websockets/websocket_service.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/datasource/home_datasource.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/repositories/home_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Home/data/repositories/home_socket_repository_impl.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/service/home_service.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_socket_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_socket_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Login/data/datasource/login_data_source.dart';
 import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repositories_impl.dart';
@@ -95,4 +100,9 @@ Future<void> setupLocator(GetIt getIt) async {
   getIt.registerLazySingleton<QrUsecases>(
     () => QrUsecasesImpl(qrRepositories: getIt<QrRepositories>()),
   );
+  getIt.registerLazySingleton<WebsocketService>(() => WebsocketManager());
+  getIt.registerLazySingleton<HomeSocketRepositories>(() =>
+      HomeSocketRepositoryImpl(websocketService: getIt<WebsocketService>()));
+  getIt.registerLazySingleton<HomeSocketUsecases>(() => HomeSocketUsecasesImpl(
+      homeSocketRepositories: getIt<HomeSocketRepositories>()));
 }

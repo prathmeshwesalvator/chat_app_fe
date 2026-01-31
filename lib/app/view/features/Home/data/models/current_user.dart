@@ -20,9 +20,9 @@ abstract class CurrentUser with _$CurrentUser {
 
 extension CurrentUserX on CurrentUser {
   CurrentUserEntities toDomain() => CurrentUserEntities(
-    message: message,
-    username: username,
-    email: email,
-    dateJoined: dateJoined,
-  );
+      message: message,
+      username: username,
+      email: email,
+      dateJoined: dateJoined,
+      userId: userId);
 }
