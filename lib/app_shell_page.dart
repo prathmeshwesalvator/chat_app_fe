@@ -31,7 +31,7 @@ class _AppShellPageState extends State<AppShellPage> {
     return AutoTabsRouter(
       routes: const [
         HomeTabRoute(),
-        ContactsRoute(),
+        ContactsTabRoute(),
         ShowQrRoute(),
         SettingsRoute(),
       ],
@@ -44,9 +44,7 @@ class _AppShellPageState extends State<AppShellPage> {
             scaffoldKey: scaffoldKey,
             index: AutoTabsRouter.of(context).activeIndex,
           ),
-
           endDrawer: isDesktop(context) ? const CustomDrawer() : null,
-
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -62,7 +60,6 @@ class _AppShellPageState extends State<AppShellPage> {
                   : child,
             ),
           ),
-
           bottomNavigationBar: isDesktop(context)
               ? null
               : CustomBottomNav(tabsRouter: tabsRouter),

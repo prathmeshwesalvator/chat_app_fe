@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/entities/contact_entities.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_state.dart';
@@ -48,7 +50,7 @@ class _ContactTileState extends State<ContactTile> {
               ),
             ),
             onTap: () {
-              // open chat
+              context.router.push(const ContactChatRoute());
             },
           ),
         );

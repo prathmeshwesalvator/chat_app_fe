@@ -43,17 +43,81 @@ class AppShellRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ContactsPage]
-class ContactsRoute extends PageRouteInfo<void> {
-  const ContactsRoute({List<PageRouteInfo>? children})
-      : super(ContactsRoute.name, initialChildren: children);
+/// [ChatPage]
+class ChatRoute extends PageRouteInfo<void> {
+  const ChatRoute({List<PageRouteInfo>? children})
+      : super(ChatRoute.name, initialChildren: children);
 
-  static const String name = 'ContactsRoute';
+  static const String name = 'ChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ContactsPage();
+      return const ChatPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ContactChatPage]
+class ContactChatRoute extends PageRouteInfo<void> {
+  const ContactChatRoute({List<PageRouteInfo>? children})
+      : super(ContactChatRoute.name, initialChildren: children);
+
+  static const String name = 'ContactChatRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ContactChatPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ContactPage]
+class ContactRoute extends PageRouteInfo<void> {
+  const ContactRoute({List<PageRouteInfo>? children})
+      : super(ContactRoute.name, initialChildren: children);
+
+  static const String name = 'ContactRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ContactPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ContactsTabPage]
+class ContactsTabRoute extends PageRouteInfo<void> {
+  const ContactsTabRoute({List<PageRouteInfo>? children})
+      : super(ContactsTabRoute.name, initialChildren: children);
+
+  static const String name = 'ContactsTabRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ContactsTabPage();
+    },
+  );
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(HomeRoute.name, initialChildren: children);
+
+  static const String name = 'HomeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomePage();
     },
   );
 }

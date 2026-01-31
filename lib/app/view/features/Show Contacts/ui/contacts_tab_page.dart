@@ -1,19 +1,18 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_event.dart';
-import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/widgets/contacts_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class ContactsPage extends StatefulWidget {
-  const ContactsPage({super.key});
+class ContactsTabPage extends StatefulWidget {
+  const ContactsTabPage({super.key});
 
   @override
-  State<ContactsPage> createState() => _ContactsPageState();
+  State<ContactsTabPage> createState() => _ContactsTabPageState();
 }
 
-class _ContactsPageState extends State<ContactsPage> {
+class _ContactsTabPageState extends State<ContactsTabPage> {
   @override
   void initState() {
     super.initState();
@@ -22,6 +21,6 @@ class _ContactsPageState extends State<ContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const ContactsList();
+    return const SafeArea(child: AutoRouter());
   }
 }

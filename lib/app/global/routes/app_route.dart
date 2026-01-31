@@ -4,12 +4,16 @@ import 'package:chat_app_fe/app/core/auth/authservice.dart';
 import 'package:chat_app_fe/app/core/auth/guestguard.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/pages/chat_page.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_desktop.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_mobile.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/pages/contact_chat_page.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/pages/contact_page.dart';
 import 'package:chat_app_fe/app_shell_page.dart';
 import 'package:chat_app_fe/app/view/features/Contacts/ui/add_contacts_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_tab_page.dart';
-import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/contacts_page.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/contacts_tab_page.dart';
 import 'package:chat_app_fe/app/view/features/Settings/ui/settings_page.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/show_qr_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/login_page.dart';
@@ -28,7 +32,6 @@ class AppRoute extends RootStackRouter {
       duration: 300.milliseconds,
       guards: [Guestguard(localstorage: getIt<Localstorage>())],
     ),
-
     CustomRoute(
       page: AppShellRoute.page,
       path: '/home',
@@ -40,30 +43,38 @@ class AppRoute extends RootStackRouter {
       ],
       children: [
         CustomRoute(
-          page: HomeTabRoute.page,
-          duration: 300.milliseconds,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          path: '',
-          guards: [
-            Authguard(
-              localstorage: getIt<Localstorage>(),
-              authservice: getIt<Authservice>(),
-            ),
-          ],
-        ),
+            page: HomeTabRoute.page,
+            duration: 300.milliseconds,
+            transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+            path: '',
+            guards: [
+              Authguard(
+                localstorage: getIt<Localstorage>(),
+                authservice: getIt<Authservice>(),
+              ),
+            ],
+            children: [
+              CustomRoute(
+                page: HomeRoute.page,
+                initial: true,
+              ),
+              CustomRoute(page: ChatRoute.page)
+            ]),
         CustomRoute(
-          page: ContactsRoute.page,
-          duration: 300.milliseconds,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          path: 'contacts',
-          guards: [
-            Authguard(
-              localstorage: getIt<Localstorage>(),
-              authservice: getIt<Authservice>(),
-            ),
-          ],
-        ),
-
+            page: ContactsTabRoute.page,
+            duration: 300.milliseconds,
+            transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+            path: 'contacts',
+            guards: [
+              Authguard(
+                localstorage: getIt<Localstorage>(),
+                authservice: getIt<Authservice>(),
+              ),
+            ],
+            children: [
+              CustomRoute(page: ContactRoute.page, initial: true),
+              CustomRoute(page: ContactChatRoute.page)
+            ]),
         CustomRoute(
           page: ShowQrRoute.page,
           duration: 300.milliseconds,

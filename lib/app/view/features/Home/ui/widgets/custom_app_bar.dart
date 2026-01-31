@@ -41,7 +41,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: theme.colorScheme.surface,
             child: Icon(Icons.person_outline, color: theme.colorScheme.primary),
           ),
-
           onSelected: (value) {
             switch (value) {
               case AppBarMenu.theme:
@@ -57,7 +56,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 break;
             }
           },
-
           itemBuilder: (_) => [
             const PopupMenuItem(
               value: AppBarMenu.theme,
@@ -82,7 +80,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-
       const SizedBox(width: 8),
     ];
 
@@ -91,18 +88,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return AppBar(
+      leading: const AutoLeadingButton(),
       automaticallyImplyLeading: false,
       elevation: 1,
       backgroundColor: theme.colorScheme.primary,
-
       title: Text(
         appBarTitle,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          fontWeight: FontWeight.w600,
-          color: Theme.of(context).colorScheme.surface,
-        ),
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.surface,
+            ),
       ),
-
       actions: actionList,
     );
   }
