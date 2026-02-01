@@ -8,11 +8,13 @@ class ChatTile extends StatelessWidget {
     required this.name,
     required this.lastMessage,
     required this.time,
+    required this.onTap,
   });
 
   final String name;
   final String lastMessage;
   final String time;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,7 @@ class ChatTile extends StatelessWidget {
 
     return InkWell(
       borderRadius: BorderRadius.circular(12),
-      onTap: () {
-        context.router.push(const ChatRoute());
-      },
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(

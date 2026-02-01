@@ -6,13 +6,13 @@ class WebsocketManager implements WebsocketService {
   WebSocketChannel? _channel;
 
   @override
-  void connect({required String url}) {
+  void connect({required Uri url}) {
     if (_channel != null) {
       return;
     }
 
     _channel = WebSocketChannel.connect(
-      Uri.parse(url),
+      url,
     );
   }
 
@@ -23,7 +23,7 @@ class WebsocketManager implements WebsocketService {
   }
 
   @override
-  Future<Stream<dynamic>> get listen async{
+  Future<Stream<dynamic>> get listen async {
     if (_channel == null) {
       throw Exception('Websocket is not connected');
     }

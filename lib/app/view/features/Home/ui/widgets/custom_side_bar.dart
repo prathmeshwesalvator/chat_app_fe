@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/chat_tile.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,6 @@ class _CustomSideBarState extends State<CustomSideBar> {
       child: SafeArea(
         child: CustomScrollView(
           physics: const ClampingScrollPhysics(),
-
           cacheExtent: 600,
           slivers: <Widget>[
             /// 🔍 Search Bar
@@ -88,6 +89,9 @@ class _CustomSideBarState extends State<CustomSideBar> {
                     name: 'User $index',
                     lastMessage: 'Last message preview...',
                     time: '12:${index}0 PM',
+                    onTap: () {
+                      context.router.push(RecentChatRoute(contactId: 8));
+                    },
                   ),
                 );
               }, childCount: 600),

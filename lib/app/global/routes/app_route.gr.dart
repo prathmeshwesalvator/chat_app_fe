@@ -43,35 +43,50 @@ class AppShellRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ChatPage]
-class ChatRoute extends PageRouteInfo<void> {
-  const ChatRoute({List<PageRouteInfo>? children})
-      : super(ChatRoute.name, initialChildren: children);
-
-  static const String name = 'ChatRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ChatPage();
-    },
-  );
-}
-
-/// generated route for
 /// [ContactChatPage]
-class ContactChatRoute extends PageRouteInfo<void> {
-  const ContactChatRoute({List<PageRouteInfo>? children})
-      : super(ContactChatRoute.name, initialChildren: children);
+class ContactChatRoute extends PageRouteInfo<ContactChatRouteArgs> {
+  ContactChatRoute({
+    Key? key,
+    required int contactId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ContactChatRoute.name,
+          args: ContactChatRouteArgs(key: key, contactId: contactId),
+          initialChildren: children,
+        );
 
   static const String name = 'ContactChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ContactChatPage();
+      final args = data.argsAs<ContactChatRouteArgs>();
+      return ContactChatPage(key: args.key, contactId: args.contactId);
     },
   );
+}
+
+class ContactChatRouteArgs {
+  const ContactChatRouteArgs({this.key, required this.contactId});
+
+  final Key? key;
+
+  final int contactId;
+
+  @override
+  String toString() {
+    return 'ContactChatRouteArgs{key: $key, contactId: $contactId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ContactChatRouteArgs) return false;
+    return key == other.key && contactId == other.contactId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ contactId.hashCode;
 }
 
 /// generated route for
@@ -184,6 +199,53 @@ class LoginRouteMobile extends PageRouteInfo<void> {
       return const LoginPageMobile();
     },
   );
+}
+
+/// generated route for
+/// [RecentChatPage]
+class RecentChatRoute extends PageRouteInfo<RecentChatRouteArgs> {
+  RecentChatRoute({
+    Key? key,
+    required int contactId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecentChatRoute.name,
+          args: RecentChatRouteArgs(key: key, contactId: contactId),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecentChatRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RecentChatRouteArgs>();
+      return RecentChatPage(key: args.key, contactId: args.contactId);
+    },
+  );
+}
+
+class RecentChatRouteArgs {
+  const RecentChatRouteArgs({this.key, required this.contactId});
+
+  final Key? key;
+
+  final int contactId;
+
+  @override
+  String toString() {
+    return 'RecentChatRouteArgs{key: $key, contactId: $contactId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RecentChatRouteArgs) return false;
+    return key == other.key && contactId == other.contactId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ contactId.hashCode;
 }
 
 /// generated route for

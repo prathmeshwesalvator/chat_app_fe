@@ -1,5 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/entities/contact_entities.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_state.dart';
@@ -7,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactTile extends StatefulWidget {
-  const ContactTile({super.key, required this.contact});
+  const ContactTile({super.key, required this.contact, required this.onTap});
   final ContactEntities contact;
+  final VoidCallback onTap;
 
   @override
   State<ContactTile> createState() => _ContactTileState();
@@ -49,9 +48,7 @@ class _ContactTileState extends State<ContactTile> {
                 color: colorScheme.outline,
               ),
             ),
-            onTap: () {
-              context.router.push(const ContactChatRoute());
-            },
+            onTap: widget.onTap,
           ),
         );
       },

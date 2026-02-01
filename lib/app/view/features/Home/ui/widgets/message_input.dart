@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageInput extends StatefulWidget {
-  const MessageInput({super.key, required this.messageController});
+  const MessageInput(
+      {super.key, required this.messageController, required this.receiver});
   final TextEditingController messageController;
+  final int receiver;
 
   @override
   State<MessageInput> createState() => _MessageInputState();
@@ -26,9 +28,8 @@ class _MessageInputState extends State<MessageInput> {
   void sendMessage(String message) {
     final senderId =
         int.tryParse(context.read<HomeCubit>().state.userId ?? '') ?? 0;
-    context
-        .read<HomeCubit>()
-        .sendMessage(message: message, receiver: 2, sender: senderId);
+    context.read<HomeCubit>().sendMessage(
+        message: message, receiver: widget.receiver, sender: senderId);
   }
 
   @override
