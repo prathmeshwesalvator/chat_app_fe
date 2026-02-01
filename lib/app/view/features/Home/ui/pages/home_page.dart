@@ -18,12 +18,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const HeaderBar(),
-        const SizedBox(height: 8),
-        const ChatList(),
-        MessageInput(messageController: messageController),
+        HeaderBar(),
+        SizedBox(height: 8),
+        ChatList(),
       ],
     );
   }

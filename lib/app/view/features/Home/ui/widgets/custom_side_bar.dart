@@ -89,9 +89,7 @@ class _CustomSideBarState extends State<CustomSideBar> {
                     name: 'User $index',
                     lastMessage: 'Last message preview...',
                     time: '12:${index}0 PM',
-                    onTap: () {
-                      context.router.push(RecentChatRoute(contactId: 8));
-                    },
+                    onTap: () {},
                   ),
                 );
               }, childCount: 600),

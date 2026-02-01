@@ -4,7 +4,6 @@ import 'package:chat_app_fe/app/core/auth/authservice.dart';
 import 'package:chat_app_fe/app/core/auth/guestguard.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/pages/recent_chat_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_desktop.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_mobile.dart';
@@ -59,7 +58,6 @@ class AppRoute extends RootStackRouter {
                 page: HomeRoute.page,
                 initial: true,
               ),
-              CustomRoute(page: RecentChatRoute.page)
             ]),
         CustomRoute(
             page: ContactsTabRoute.page,

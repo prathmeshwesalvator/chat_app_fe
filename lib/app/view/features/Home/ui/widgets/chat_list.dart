@@ -20,6 +20,7 @@ class ChatList extends StatelessWidget {
                     name: 'name $index',
                     lastMessage: 'lastMessage',
                     time: 'time',
+                    onTap: () {},
                   ),
                 );
               }, childCount: 4),

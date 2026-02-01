@@ -102,7 +102,7 @@ Future<void> setupLocator(GetIt getIt) async {
   );
   getIt.registerLazySingleton<WebsocketService>(() => WebsocketManager());
   getIt.registerLazySingleton<HomeSocketRepositories>(() =>
-      HomeSocketRepositoryImpl(websocketService: getIt<WebsocketService>()));
+      HomeSocketRepositoryImpl(websocketService: getIt<WebsocketService>(), localstorage: getIt<Localstorage>()));
   getIt.registerLazySingleton<HomeSocketUsecases>(() => HomeSocketUsecasesImpl(
       homeSocketRepositories: getIt<HomeSocketRepositories>()));
 }

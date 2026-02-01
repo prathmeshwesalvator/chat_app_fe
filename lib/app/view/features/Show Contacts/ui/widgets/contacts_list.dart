@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_state.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/widgets/contact_tile.dart';
@@ -23,7 +25,13 @@ class _ContactsListState extends State<ContactsList> {
               sliver: SliverFixedExtentList.builder(
                 itemCount: state.contacts.length,
                 itemBuilder: (context, index) {
-                  return ContactTile(contact: state.contacts[index]);
+                  return ContactTile(
+                    contact: state.contacts[index],
+                    onTap: () {
+                      context.router.push(ContactChatRoute(
+                          contactId: state.contacts[index].contactUserId));
+                    },
+                  );
                 },
                 itemExtent: 79,
               ),

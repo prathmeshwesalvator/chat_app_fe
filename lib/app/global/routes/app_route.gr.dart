@@ -202,53 +202,6 @@ class LoginRouteMobile extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RecentChatPage]
-class RecentChatRoute extends PageRouteInfo<RecentChatRouteArgs> {
-  RecentChatRoute({
-    Key? key,
-    required int contactId,
-    List<PageRouteInfo>? children,
-  }) : super(
-          RecentChatRoute.name,
-          args: RecentChatRouteArgs(key: key, contactId: contactId),
-          initialChildren: children,
-        );
-
-  static const String name = 'RecentChatRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<RecentChatRouteArgs>();
-      return RecentChatPage(key: args.key, contactId: args.contactId);
-    },
-  );
-}
-
-class RecentChatRouteArgs {
-  const RecentChatRouteArgs({this.key, required this.contactId});
-
-  final Key? key;
-
-  final int contactId;
-
-  @override
-  String toString() {
-    return 'RecentChatRouteArgs{key: $key, contactId: $contactId}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! RecentChatRouteArgs) return false;
-    return key == other.key && contactId == other.contactId;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ contactId.hashCode;
-}
-
-/// generated route for
 /// [SettingsPage]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
