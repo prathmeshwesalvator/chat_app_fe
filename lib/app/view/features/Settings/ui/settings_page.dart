@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:chat_app_fe/app/global/theme/bloc/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -43,8 +45,10 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.dark_mode_outlined,
                 title: 'Dark Mode',
                 value: theme.brightness == Brightness.dark,
-                onChanged: (value) {
-                  // Hook to theme cubit / provider
+                onChanged: (_) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    context.read<ThemeCubit>().changeTheme();
+                  });
                 },
               ),
               _SwitchTile(

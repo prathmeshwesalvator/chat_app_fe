@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,17 +13,14 @@ class HomeTabPage extends StatefulWidget {
 }
 
 class _HomeTabPageState extends State<HomeTabPage> {
-
   @override
   void initState() {
-    context.read<HomeCubit>().connectSockets();
+    context.read<HomeBloc>().add(ConnectSocketEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: AutoRouter()
-    );
+    return const SafeArea(child: AutoRouter());
   }
 }

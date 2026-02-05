@@ -23,6 +23,7 @@ mixin _$HomeState {
   Blocstatus? get profileStatus;
   String get errorMessage;
   Blocstatus? get logOutStatus;
+  List<MessageEntities> get messages;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -48,16 +49,26 @@ mixin _$HomeState {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.logOutStatus, logOutStatus) ||
-                other.logOutStatus == logOutStatus));
+                other.logOutStatus == logOutStatus) &&
+            const DeepCollectionEquality().equals(other.messages, messages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, userId, username, email,
-      dateJoined, profileStatus, errorMessage, logOutStatus);
+  int get hashCode => Object.hash(
+      runtimeType,
+      message,
+      userId,
+      username,
+      email,
+      dateJoined,
+      profileStatus,
+      errorMessage,
+      logOutStatus,
+      const DeepCollectionEquality().hash(messages));
 
   @override
   String toString() {
-    return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus)';
+    return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus, messages: $messages)';
   }
 }
 
@@ -74,7 +85,8 @@ abstract mixin class $HomeStateCopyWith<$Res> {
       String dateJoined,
       Blocstatus? profileStatus,
       String errorMessage,
-      Blocstatus? logOutStatus});
+      Blocstatus? logOutStatus,
+      List<MessageEntities> messages});
 }
 
 /// @nodoc
@@ -97,6 +109,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
     Object? profileStatus = freezed,
     Object? errorMessage = null,
     Object? logOutStatus = freezed,
+    Object? messages = null,
   }) {
     return _then(_self.copyWith(
       message: null == message
@@ -131,6 +144,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _self.logOutStatus
           : logOutStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
+      messages: null == messages
+          ? _self.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageEntities>,
     ));
   }
 }
@@ -236,7 +253,8 @@ extension HomeStatePatterns on HomeState {
             String dateJoined,
             Blocstatus? profileStatus,
             String errorMessage,
-            Blocstatus? logOutStatus)?
+            Blocstatus? logOutStatus,
+            List<MessageEntities> messages)?
         $default, {
     required TResult orElse(),
   }) {
@@ -251,7 +269,8 @@ extension HomeStatePatterns on HomeState {
             _that.dateJoined,
             _that.profileStatus,
             _that.errorMessage,
-            _that.logOutStatus);
+            _that.logOutStatus,
+            _that.messages);
       case _:
         return orElse();
     }
@@ -280,7 +299,8 @@ extension HomeStatePatterns on HomeState {
             String dateJoined,
             Blocstatus? profileStatus,
             String errorMessage,
-            Blocstatus? logOutStatus)
+            Blocstatus? logOutStatus,
+            List<MessageEntities> messages)
         $default,
   ) {
     final _that = this;
@@ -294,7 +314,8 @@ extension HomeStatePatterns on HomeState {
             _that.dateJoined,
             _that.profileStatus,
             _that.errorMessage,
-            _that.logOutStatus);
+            _that.logOutStatus,
+            _that.messages);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -322,7 +343,8 @@ extension HomeStatePatterns on HomeState {
             String dateJoined,
             Blocstatus? profileStatus,
             String errorMessage,
-            Blocstatus? logOutStatus)?
+            Blocstatus? logOutStatus,
+            List<MessageEntities> messages)?
         $default,
   ) {
     final _that = this;
@@ -336,7 +358,8 @@ extension HomeStatePatterns on HomeState {
             _that.dateJoined,
             _that.profileStatus,
             _that.errorMessage,
-            _that.logOutStatus);
+            _that.logOutStatus,
+            _that.messages);
       case _:
         return null;
     }
@@ -354,7 +377,9 @@ class _HomeState implements HomeState {
       this.dateJoined = '',
       this.profileStatus,
       this.errorMessage = '',
-      this.logOutStatus});
+      this.logOutStatus,
+      final List<MessageEntities> messages = const []})
+      : _messages = messages;
 
   @override
   @JsonKey()
@@ -378,6 +403,14 @@ class _HomeState implements HomeState {
   final String errorMessage;
   @override
   final Blocstatus? logOutStatus;
+  final List<MessageEntities> _messages;
+  @override
+  @JsonKey()
+  List<MessageEntities> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -404,16 +437,26 @@ class _HomeState implements HomeState {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.logOutStatus, logOutStatus) ||
-                other.logOutStatus == logOutStatus));
+                other.logOutStatus == logOutStatus) &&
+            const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, userId, username, email,
-      dateJoined, profileStatus, errorMessage, logOutStatus);
+  int get hashCode => Object.hash(
+      runtimeType,
+      message,
+      userId,
+      username,
+      email,
+      dateJoined,
+      profileStatus,
+      errorMessage,
+      logOutStatus,
+      const DeepCollectionEquality().hash(_messages));
 
   @override
   String toString() {
-    return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus)';
+    return 'HomeState(message: $message, userId: $userId, username: $username, email: $email, dateJoined: $dateJoined, profileStatus: $profileStatus, errorMessage: $errorMessage, logOutStatus: $logOutStatus, messages: $messages)';
   }
 }
 
@@ -433,7 +476,8 @@ abstract mixin class _$HomeStateCopyWith<$Res>
       String dateJoined,
       Blocstatus? profileStatus,
       String errorMessage,
-      Blocstatus? logOutStatus});
+      Blocstatus? logOutStatus,
+      List<MessageEntities> messages});
 }
 
 /// @nodoc
@@ -456,6 +500,7 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
     Object? profileStatus = freezed,
     Object? errorMessage = null,
     Object? logOutStatus = freezed,
+    Object? messages = null,
   }) {
     return _then(_HomeState(
       message: null == message
@@ -490,6 +535,10 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
           ? _self.logOutStatus
           : logOutStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
+      messages: null == messages
+          ? _self._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageEntities>,
     ));
   }
 }

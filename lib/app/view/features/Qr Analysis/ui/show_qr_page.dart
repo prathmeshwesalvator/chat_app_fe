@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_state.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_event.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_state.dart';
@@ -21,20 +22,38 @@ class ShowQrPage extends StatefulWidget {
 
 class _ShowQrPageState extends State<ShowQrPage> {
   Timer? _timer;
+  final ValueNotifier<int> _remainingSeconds = ValueNotifier(0);
 
   @override
   void initState() {
     super.initState();
-    context.read<QrBloc>().add(GenerateHash());
+
+    final qrBloc = context.read<QrBloc>();
+    qrBloc.add(GenerateHash());
 
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted) setState(() {});
+      final state = qrBloc.state;
+
+      final createdAt = DateTime.tryParse(state.qrData?.createdAt ?? '');
+      if (createdAt == null) {
+        _remainingSeconds.value = 0;
+        return;
+      }
+
+      final remaining = createdAt
+          .add(const Duration(minutes: 5))
+          .difference(DateTime.now())
+          .inSeconds
+          .clamp(0, 300);
+
+      _remainingSeconds.value = remaining;
     });
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _remainingSeconds.dispose();
     super.dispose();
   }
 
@@ -59,73 +78,63 @@ class _ShowQrPageState extends State<ShowQrPage> {
           return const SizedBox.shrink();
         }
 
-        final userState = context.read<HomeCubit>().state;
-        final createdAt = DateTime.tryParse(state.qrData?.createdAt ?? '');
-
-        final remainingSeconds = createdAt == null
-            ? 0
-            : createdAt
-                  .add(const Duration(minutes: 5))
-                  .difference(DateTime.now())
-                  .inSeconds
-                  .clamp(0, 300);
-
-        final isExpired = remainingSeconds <= 0;
-
         return Center(
-          child: Container(
+          child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 360),
             child: Card(
-              elevation: 8,
-              shadowColor: colorScheme.primary.withOpacity(.15),
+              elevation: 10,
+              shadowColor: colorScheme.primary.withOpacity(.2),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(22),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    /// Avatar
-                    CircleAvatar(
-                      radius: 48,
-                      backgroundColor: colorScheme.primary.withOpacity(.1),
-                      child: Icon(
-                        Icons.person,
-                        size: 42,
-                        color: colorScheme.primary,
-                      ),
-                    ),
-
-                    const SizedBox(height: 14),
-
-                    /// Username
-                    Text(
-                      userState.username,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    const SizedBox(height: 4),
-
-                    Text(
-                      'Share your contact securely',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
+                    BlocBuilder<HomeBloc, HomeState>(
+                      builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _AvatarSection(colorScheme: colorScheme),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  state.username,
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'Share your contact securely',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 22),
 
-                    /// QR / Expired Switch
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 350),
-                      switchInCurve: Curves.easeOut,
-                      switchOutCurve: Curves.easeIn,
-                      child: isExpired
-                          ? expiredView(context)
-                          : qrView(context, state),
+                    /// QR + Expiry Switch
+                    ValueListenableBuilder<int>(
+                      valueListenable: _remainingSeconds,
+                      builder: (_, remaining, __) {
+                        final isExpired = remaining <= 0;
+
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 350),
+                          child: isExpired
+                              ? expiredView(context)
+                              : qrView(context, state),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 20),
@@ -134,26 +143,18 @@ class _ShowQrPageState extends State<ShowQrPage> {
 
                     const SizedBox(height: 14),
 
-                    /// Status Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                            color: isExpired ? colorScheme.error : Colors.green,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          isExpired
-                              ? 'QR expired'
-                              : 'Expires in ${_formatTime(remainingSeconds)}',
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ],
+                    /// Status
+                    ValueListenableBuilder<int>(
+                      valueListenable: _remainingSeconds,
+                      builder: (_, remaining, __) {
+                        final isExpired = remaining <= 0;
+
+                        return _StatusRow(
+                          isExpired: isExpired,
+                          remainingSeconds: remaining,
+                          formatter: _formatTime,
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -162,6 +163,65 @@ class _ShowQrPageState extends State<ShowQrPage> {
           ),
         );
       },
+    );
+  }
+}
+
+class _AvatarSection extends StatelessWidget {
+  final ColorScheme colorScheme;
+
+  const _AvatarSection({required this.colorScheme});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 48,
+      backgroundColor: colorScheme.primary.withOpacity(.1),
+      child: Icon(
+        Icons.person,
+        size: 42,
+        color: colorScheme.primary,
+      ),
+    );
+  }
+}
+
+class _StatusRow extends StatelessWidget {
+  final bool isExpired;
+  final int remainingSeconds;
+  final String Function(int) formatter;
+
+  const _StatusRow({
+    required this.isExpired,
+    required this.remainingSeconds,
+    required this.formatter,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          height: 10,
+          width: 10,
+          decoration: BoxDecoration(
+            color: isExpired ? colorScheme.error : Colors.green,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          isExpired
+              ? 'QR expired'
+              : 'Expires in ${formatter(remainingSeconds)}',
+          style: theme.textTheme.bodySmall,
+        ),
+      ],
     );
   }
 }

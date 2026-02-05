@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/utils/device_identification.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';
+import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_event.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_app_bar.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_bottom_nav.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_drawer.dart';
@@ -23,7 +24,7 @@ class _AppShellPageState extends State<AppShellPage> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().loadUserProfile();
+    context.read<HomeBloc>().add(LoadUserProfileEvent());
   }
 
   @override

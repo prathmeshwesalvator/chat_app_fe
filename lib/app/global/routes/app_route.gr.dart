@@ -52,6 +52,7 @@ class ContactChatRoute extends PageRouteInfo<ContactChatRouteArgs> {
   }) : super(
           ContactChatRoute.name,
           args: ContactChatRouteArgs(key: key, contactId: contactId),
+          rawPathParams: {'contactId': contactId},
           initialChildren: children,
         );
 
@@ -60,7 +61,11 @@ class ContactChatRoute extends PageRouteInfo<ContactChatRouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<ContactChatRouteArgs>();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ContactChatRouteArgs>(
+        orElse: () =>
+            ContactChatRouteArgs(contactId: pathParams.getInt('contactId')),
+      );
       return ContactChatPage(key: args.key, contactId: args.contactId);
     },
   );

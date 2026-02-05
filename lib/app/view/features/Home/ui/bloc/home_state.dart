@@ -1,5 +1,6 @@
 import 'package:chat_app_fe/app/global/converters/int_to_string_converter.dart';
 import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
+import 'package:chat_app_fe/app/view/features/Home/domain/entities/message_entities.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'home_state.freezed.dart';
 
@@ -14,6 +15,7 @@ abstract class HomeState with _$HomeState {
     Blocstatus? profileStatus,
     @Default('') String errorMessage,
     Blocstatus? logOutStatus,
+    @Default([]) List<MessageEntities> messages,
   }) = _HomeState;
 
   factory HomeState.initial() => const _HomeState();

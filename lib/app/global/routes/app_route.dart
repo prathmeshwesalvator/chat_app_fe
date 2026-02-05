@@ -72,7 +72,8 @@ class AppRoute extends RootStackRouter {
             ],
             children: [
               CustomRoute(page: ContactRoute.page, initial: true),
-              CustomRoute(page: ContactChatRoute.page)
+              CustomRoute(page: ContactChatRoute.page,
+              path: 'contact-chat/:contactId')
             ]),
         CustomRoute(
           page: ShowQrRoute.page,
