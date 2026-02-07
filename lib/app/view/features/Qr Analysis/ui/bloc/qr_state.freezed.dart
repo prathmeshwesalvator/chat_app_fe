@@ -16,6 +16,9 @@ T _$identity<T>(T value) => value;
 mixin _$QrState {
   QrEntities? get qrData;
   Blocstatus? get qrStatus;
+  Blocstatus? get userInfoStatus;
+  UserInfoEntities? get userInfo;
+  Blocstatus? get addContactStatus;
   String get errorMessage;
 
   /// Create a copy of QrState
@@ -33,16 +36,23 @@ mixin _$QrState {
             (identical(other.qrData, qrData) || other.qrData == qrData) &&
             (identical(other.qrStatus, qrStatus) ||
                 other.qrStatus == qrStatus) &&
+            (identical(other.userInfoStatus, userInfoStatus) ||
+                other.userInfoStatus == userInfoStatus) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.addContactStatus, addContactStatus) ||
+                other.addContactStatus == addContactStatus) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, qrData, qrStatus, errorMessage);
+  int get hashCode => Object.hash(runtimeType, qrData, qrStatus, userInfoStatus,
+      userInfo, addContactStatus, errorMessage);
 
   @override
   String toString() {
-    return 'QrState(qrData: $qrData, qrStatus: $qrStatus, errorMessage: $errorMessage)';
+    return 'QrState(qrData: $qrData, qrStatus: $qrStatus, userInfoStatus: $userInfoStatus, userInfo: $userInfo, addContactStatus: $addContactStatus, errorMessage: $errorMessage)';
   }
 }
 
@@ -51,7 +61,13 @@ abstract mixin class $QrStateCopyWith<$Res> {
   factory $QrStateCopyWith(QrState value, $Res Function(QrState) _then) =
       _$QrStateCopyWithImpl;
   @useResult
-  $Res call({QrEntities? qrData, Blocstatus? qrStatus, String errorMessage});
+  $Res call(
+      {QrEntities? qrData,
+      Blocstatus? qrStatus,
+      Blocstatus? userInfoStatus,
+      UserInfoEntities? userInfo,
+      Blocstatus? addContactStatus,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -68,6 +84,9 @@ class _$QrStateCopyWithImpl<$Res> implements $QrStateCopyWith<$Res> {
   $Res call({
     Object? qrData = freezed,
     Object? qrStatus = freezed,
+    Object? userInfoStatus = freezed,
+    Object? userInfo = freezed,
+    Object? addContactStatus = freezed,
     Object? errorMessage = null,
   }) {
     return _then(_self.copyWith(
@@ -78,6 +97,18 @@ class _$QrStateCopyWithImpl<$Res> implements $QrStateCopyWith<$Res> {
       qrStatus: freezed == qrStatus
           ? _self.qrStatus
           : qrStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      userInfoStatus: freezed == userInfoStatus
+          ? _self.userInfoStatus
+          : userInfoStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      userInfo: freezed == userInfo
+          ? _self.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserInfoEntities?,
+      addContactStatus: freezed == addContactStatus
+          ? _self.addContactStatus
+          : addContactStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
       errorMessage: null == errorMessage
           ? _self.errorMessage
@@ -181,14 +212,20 @@ extension QrStatePatterns on QrState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            QrEntities? qrData, Blocstatus? qrStatus, String errorMessage)?
+            QrEntities? qrData,
+            Blocstatus? qrStatus,
+            Blocstatus? userInfoStatus,
+            UserInfoEntities? userInfo,
+            Blocstatus? addContactStatus,
+            String errorMessage)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _QrState() when $default != null:
-        return $default(_that.qrData, _that.qrStatus, _that.errorMessage);
+        return $default(_that.qrData, _that.qrStatus, _that.userInfoStatus,
+            _that.userInfo, _that.addContactStatus, _that.errorMessage);
       case _:
         return orElse();
     }
@@ -210,13 +247,19 @@ extension QrStatePatterns on QrState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            QrEntities? qrData, Blocstatus? qrStatus, String errorMessage)
+            QrEntities? qrData,
+            Blocstatus? qrStatus,
+            Blocstatus? userInfoStatus,
+            UserInfoEntities? userInfo,
+            Blocstatus? addContactStatus,
+            String errorMessage)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _QrState():
-        return $default(_that.qrData, _that.qrStatus, _that.errorMessage);
+        return $default(_that.qrData, _that.qrStatus, _that.userInfoStatus,
+            _that.userInfo, _that.addContactStatus, _that.errorMessage);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -237,13 +280,19 @@ extension QrStatePatterns on QrState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            QrEntities? qrData, Blocstatus? qrStatus, String errorMessage)?
+            QrEntities? qrData,
+            Blocstatus? qrStatus,
+            Blocstatus? userInfoStatus,
+            UserInfoEntities? userInfo,
+            Blocstatus? addContactStatus,
+            String errorMessage)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _QrState() when $default != null:
-        return $default(_that.qrData, _that.qrStatus, _that.errorMessage);
+        return $default(_that.qrData, _that.qrStatus, _that.userInfoStatus,
+            _that.userInfo, _that.addContactStatus, _that.errorMessage);
       case _:
         return null;
     }
@@ -253,12 +302,24 @@ extension QrStatePatterns on QrState {
 /// @nodoc
 
 class _QrState implements QrState {
-  const _QrState({this.qrData, this.qrStatus, this.errorMessage = ''});
+  const _QrState(
+      {this.qrData,
+      this.qrStatus,
+      this.userInfoStatus,
+      this.userInfo,
+      this.addContactStatus,
+      this.errorMessage = ''});
 
   @override
   final QrEntities? qrData;
   @override
   final Blocstatus? qrStatus;
+  @override
+  final Blocstatus? userInfoStatus;
+  @override
+  final UserInfoEntities? userInfo;
+  @override
+  final Blocstatus? addContactStatus;
   @override
   @JsonKey()
   final String errorMessage;
@@ -279,16 +340,23 @@ class _QrState implements QrState {
             (identical(other.qrData, qrData) || other.qrData == qrData) &&
             (identical(other.qrStatus, qrStatus) ||
                 other.qrStatus == qrStatus) &&
+            (identical(other.userInfoStatus, userInfoStatus) ||
+                other.userInfoStatus == userInfoStatus) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.addContactStatus, addContactStatus) ||
+                other.addContactStatus == addContactStatus) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, qrData, qrStatus, errorMessage);
+  int get hashCode => Object.hash(runtimeType, qrData, qrStatus, userInfoStatus,
+      userInfo, addContactStatus, errorMessage);
 
   @override
   String toString() {
-    return 'QrState(qrData: $qrData, qrStatus: $qrStatus, errorMessage: $errorMessage)';
+    return 'QrState(qrData: $qrData, qrStatus: $qrStatus, userInfoStatus: $userInfoStatus, userInfo: $userInfo, addContactStatus: $addContactStatus, errorMessage: $errorMessage)';
   }
 }
 
@@ -298,7 +366,13 @@ abstract mixin class _$QrStateCopyWith<$Res> implements $QrStateCopyWith<$Res> {
       __$QrStateCopyWithImpl;
   @override
   @useResult
-  $Res call({QrEntities? qrData, Blocstatus? qrStatus, String errorMessage});
+  $Res call(
+      {QrEntities? qrData,
+      Blocstatus? qrStatus,
+      Blocstatus? userInfoStatus,
+      UserInfoEntities? userInfo,
+      Blocstatus? addContactStatus,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -315,6 +389,9 @@ class __$QrStateCopyWithImpl<$Res> implements _$QrStateCopyWith<$Res> {
   $Res call({
     Object? qrData = freezed,
     Object? qrStatus = freezed,
+    Object? userInfoStatus = freezed,
+    Object? userInfo = freezed,
+    Object? addContactStatus = freezed,
     Object? errorMessage = null,
   }) {
     return _then(_QrState(
@@ -325,6 +402,18 @@ class __$QrStateCopyWithImpl<$Res> implements _$QrStateCopyWith<$Res> {
       qrStatus: freezed == qrStatus
           ? _self.qrStatus
           : qrStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      userInfoStatus: freezed == userInfoStatus
+          ? _self.userInfoStatus
+          : userInfoStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      userInfo: freezed == userInfo
+          ? _self.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserInfoEntities?,
+      addContactStatus: freezed == addContactStatus
+          ? _self.addContactStatus
+          : addContactStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
       errorMessage: null == errorMessage
           ? _self.errorMessage

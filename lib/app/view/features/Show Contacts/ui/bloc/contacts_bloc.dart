@@ -1,4 +1,5 @@
 import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/entities/contact_entities.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/usecases/contact_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_event.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_state.dart';
@@ -27,5 +28,17 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
         },
       );
     });
+
+    on<UpdateContacts>(
+      (event, emit) {
+        emit(state.copyWith(contactStatus: Blocstatus.loading));
+
+        final updatedContacts = List<ContactEntities>.from(state.contacts)
+          ..add(event.contact);
+
+        emit(state.copyWith(
+            contactStatus: Blocstatus.success, contacts: updatedContacts));
+      },
+    );
   }
 }

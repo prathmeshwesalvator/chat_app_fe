@@ -69,7 +69,18 @@ class _ShowQrPageState extends State<ShowQrPage> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return BlocBuilder<QrBloc, QrState>(
+    return BlocConsumer<QrBloc, QrState>(
+      listener: (context, state) {
+        if (state.addContactStatus == Blocstatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Failed to add contact ${state.errorMessage}')));
+        }
+
+        if (state.addContactStatus == Blocstatus.success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Contact Added successfully')));
+        }
+      },
       builder: (context, state) {
         if (state.qrStatus == Blocstatus.loading) {
           return ShimmerLoader(colorScheme: colorScheme);

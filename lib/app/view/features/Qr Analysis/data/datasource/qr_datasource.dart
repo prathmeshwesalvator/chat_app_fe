@@ -1,9 +1,13 @@
 import 'package:chat_app_fe/app/global/error/failure.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/model/qr_model.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/model/user_info_model.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/service/qr_analysis_service.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/data/models/contact_model.dart';
 
 abstract class QrDatasource {
   Future<QrModel> generateHash();
+  Future<UserInfoModel> getInfo({required Map<String, dynamic> body});
+  Future<ContactModel> addContact({required Map<String, dynamic> body});
 }
 
 class QrDatasourceImpl implements QrDatasource {
@@ -19,6 +23,27 @@ class QrDatasourceImpl implements QrDatasource {
       return response;
     } catch (e) {
       throw Exception(Failure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<UserInfoModel> getInfo({required Map<String, dynamic> body}) async {
+    try {
+      final response = await qrAnalysisService.getInfo(body);
+
+      return response;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<ContactModel> addContact({required Map<String, dynamic> body}) async {
+    try {
+      final response = await qrAnalysisService.addContact(body);
+
+      return response;
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

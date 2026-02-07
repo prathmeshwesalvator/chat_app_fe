@@ -1,4 +1,7 @@
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_bloc.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrScannerPage extends StatefulWidget {
@@ -26,6 +29,10 @@ class _QrScannerPageState extends State<QrScannerPage> {
 
             if (code.isNotEmpty) {
               isScanned = true;
+
+              context
+                  .read<QrBloc>()
+                  .add(GetUserInfo(body: {'contactHash': code}));
 
               await controller.stop(); // ⭐ stop camera stream
 

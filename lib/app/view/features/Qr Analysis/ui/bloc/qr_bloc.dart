@@ -27,5 +27,35 @@ class QrBloc extends Bloc<QrEvent, QrState> {
         },
       );
     });
+
+    on<GetUserInfo>(
+      (event, emit) async {
+        emit(state.copyWith(userInfoStatus: Blocstatus.loading));
+
+        final response = await qrUsecases.getInfo(event.body);
+
+        response.fold((l) {
+          emit(state.copyWith(
+              userInfoStatus: Blocstatus.error, errorMessage: l.errorMessage));
+        }, (r) {
+          emit(state.copyWith(userInfoStatus: Blocstatus.success, userInfo: r));
+        });
+      },
+    );
+
+    on<AddContact>(
+      (event, emit) async {
+        emit(state.copyWith(addContactStatus: Blocstatus.loading));
+
+        final response = await qrUsecases.addContact(body: event.body);
+
+        response.fold((l) {
+          emit(state.copyWith(
+              addContactStatus: Blocstatus.error, errorMessage: l.toString()));
+        }, (r) {
+          emit(state.copyWith(addContactStatus: Blocstatus.success));
+        });
+      },
+    );
   }
 }
