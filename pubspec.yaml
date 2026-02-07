@@ -41,6 +41,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_switch: ^0.3.2
   cupertino_icons: ^1.0.8
+  mobile_scanner: ^4.0.1
 
 dev_dependencies:
   flutter_test:

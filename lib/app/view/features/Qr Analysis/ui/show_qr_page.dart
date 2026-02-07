@@ -6,6 +6,7 @@ import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_state.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_event.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_state.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/open_dialog.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/expired_view.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/qr_view.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/shimmer_loader.dart';
@@ -81,84 +82,98 @@ class _ShowQrPageState extends State<ShowQrPage> {
         return Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 360),
-            child: Card(
-              elevation: 10,
-              shadowColor: colorScheme.primary.withOpacity(.2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(22),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BlocBuilder<HomeBloc, HomeState>(
-                      builder: (context, state) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _AvatarSection(colorScheme: colorScheme),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              children: [
+                Card(
+                  elevation: 10,
+                  shadowColor: colorScheme.primary.withOpacity(.2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(22),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        BlocBuilder<HomeBloc, HomeState>(
+                          builder: (context, state) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(
-                                  state.username,
-                                  style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  'Share your contact securely',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
+                                _AvatarSection(colorScheme: colorScheme),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state.username,
+                                      style:
+                                          theme.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Share your contact securely',
+                                      style:
+                                          theme.textTheme.bodySmall?.copyWith(
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
-                        );
-                      },
+                            );
+                          },
+                        ),
+
+                        const SizedBox(height: 22),
+
+                        ValueListenableBuilder<int>(
+                          valueListenable: _remainingSeconds,
+                          builder: (_, remaining, __) {
+                            final isExpired = remaining <= 0;
+
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 350),
+                              child: isExpired
+                                  ? expiredView(context)
+                                  : qrView(context, state),
+                            );
+                          },
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        Divider(height: 1, color: colorScheme.outlineVariant),
+
+                        const SizedBox(height: 14),
+
+                        /// Status
+                        ValueListenableBuilder<int>(
+                          valueListenable: _remainingSeconds,
+                          builder: (_, remaining, __) {
+                            final isExpired = remaining <= 0;
+
+                            return _StatusRow(
+                              isExpired: isExpired,
+                              remainingSeconds: remaining,
+                              formatter: _formatTime,
+                            );
+                          },
+                        ),
+                      ],
                     ),
-
-                    const SizedBox(height: 22),
-
-                    /// QR + Expiry Switch
-                    ValueListenableBuilder<int>(
-                      valueListenable: _remainingSeconds,
-                      builder: (_, remaining, __) {
-                        final isExpired = remaining <= 0;
-
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 350),
-                          child: isExpired
-                              ? expiredView(context)
-                              : qrView(context, state),
-                        );
-                      },
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    Divider(height: 1, color: colorScheme.outlineVariant),
-
-                    const SizedBox(height: 14),
-
-                    /// Status
-                    ValueListenableBuilder<int>(
-                      valueListenable: _remainingSeconds,
-                      builder: (_, remaining, __) {
-                        final isExpired = remaining <= 0;
-
-                        return _StatusRow(
-                          isExpired: isExpired,
-                          remainingSeconds: remaining,
-                          formatter: _formatTime,
-                        );
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  height: 10,
+                ),
+                OutlinedButton.icon(
+                    icon: const Icon(Icons.add_outlined),
+                    onPressed: () {
+                      openDialog(context);
+                    },
+                    label: const Text('Add Contact'))
+              ],
             ),
           ),
         );
