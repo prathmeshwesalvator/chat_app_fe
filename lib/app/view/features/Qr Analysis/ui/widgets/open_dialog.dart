@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> openDialog(BuildContext context) async {
-  return showDialog(
+  await showDialog(
     context: context,
-    builder: (BuildContext dialogContext) {
+    builder: (dialogContext) {
       return AlertDialog(
         title: const Text('Choose Option'),
         content: const Text('Select how you want to continue.'),
@@ -26,10 +26,10 @@ Future<void> openDialog(BuildContext context) async {
                 ),
               );
 
-              if (result != null) {
-                await addingResultPopup(
+              if (result != null && context.mounted) {
+                addingResultPopup(
                   context,
-                  "You are adding ",
+                  "You are adding",
                   result.toString(),
                 );
               }
@@ -37,9 +37,9 @@ Future<void> openDialog(BuildContext context) async {
             child: const Text('Scan QR with Camera'),
           ),
           TextButton(
-            onPressed: () async {
+            onPressed: () {
               Navigator.pop(dialogContext);
-              await showMailEntryDialog(context);
+              showMailEntryDialog(context);
             },
             child: const Text('Enter mail manually'),
           ),
@@ -48,6 +48,8 @@ Future<void> openDialog(BuildContext context) async {
     },
   );
 }
+
+
 
 Future<void> showResultPopup(
   BuildContext context,
@@ -69,6 +71,8 @@ Future<void> showResultPopup(
   );
 }
 
+
+
 Future<void> addingResultPopup(
   BuildContext context,
   String title,
@@ -78,27 +82,30 @@ Future<void> addingResultPopup(
     context: context,
     barrierDismissible: false,
     builder: (_) {
-      return BlocBuilder<QrBloc, QrState>(
+      return BlocConsumer<QrBloc, QrState>(
+        listenWhen: (p, c) => p.addContactStatus != c.addContactStatus,
+        listener: (context, state) {
+          if (state.addContactStatus == Blocstatus.success) {
+            Navigator.pop(context);
+          }
+        },
         builder: (context, state) {
-          /// 🔹 LOADING STATE
+
+          /// LOADING USER INFO
           if (state.userInfoStatus == Blocstatus.loading) {
             return const AlertDialog(
               content: SizedBox(
                 height: 80,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+                child: Center(child: CircularProgressIndicator()),
               ),
             );
           }
 
-          /// 🔹 ERROR STATE
+          /// ERROR
           if (state.userInfoStatus == Blocstatus.error) {
             return AlertDialog(
               title: const Text("Error"),
-              content: Text(
-                state.errorMessage,
-              ),
+              content: Text(state.errorMessage),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
@@ -108,10 +115,12 @@ Future<void> addingResultPopup(
             );
           }
 
-          /// 🔹 SUCCESS STATE
+          /// SUCCESS USER FETCH
           if (state.userInfoStatus == Blocstatus.success &&
               state.userInfo != null) {
+
             final user = state.userInfo!;
+            final isAdding = state.addContactStatus == Blocstatus.loading;
 
             return AlertDialog(
               title: Text(title),
@@ -119,13 +128,9 @@ Future<void> addingResultPopup(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    user.username,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
+                  Text(user.username,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 6),
                   Text(user.fullName),
                   const SizedBox(height: 6),
@@ -134,23 +139,30 @@ Future<void> addingResultPopup(
               ),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: isAdding ? null : () => Navigator.pop(context),
                   child: const Text("Cancel"),
                 ),
                 TextButton(
-                  onPressed: () {
-                    final Map<String, dynamic> body = {'contactHash': value};
-                    context.read<QrBloc>().add(AddContact(body: body));
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Add"),
+                  onPressed: isAdding
+                      ? null
+                      : () {
+                          context.read<QrBloc>().add(
+                                AddContact(body: {'contactHash': value}),
+                              );
+                        },
+                  child: isAdding
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Text("Add"),
                 ),
               ],
             );
           }
 
-          /// 🔹 DEFAULT FALLBACK
-          return const SizedBox.shrink();
+          return const SizedBox();
         },
       );
     },
