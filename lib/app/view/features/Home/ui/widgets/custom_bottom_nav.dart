@@ -41,34 +41,21 @@ class CustomBottomNav extends StatelessWidget {
           ),
           _navItem(
             context,
-            icon: Icons.contacts_outlined,
-            label: 'Contacts',
+            icon: Icons.call_sharp,
+            label: 'Calls',
             index: 1,
           ),
-
-          // BottomNavigationBarItem(
-          //   label: 'Add',
-          //   icon: CircularLogo(
-          //     size: 64,
-          
-          //     icon: Icons.add_outlined,
-          //     pulseAnimation: true,
-          //     pulseDuration: 30.seconds,
-          //     ) 
-          // ),
-
-
           _navItem(
             context,
             icon: Icons.qr_code_rounded,
             label: 'QR',
-            index: 3,
+            index: 2,
           ),
           _navItem(
             context,
             icon: Icons.settings_rounded,
             label: 'Settings',
-            index: 4,
+            index: 3,
           ),
         ],
       ),
@@ -82,9 +69,8 @@ class CustomBottomNav extends StatelessWidget {
     required int index,
   }) {
     final isActive = tabsRouter.activeIndex == index;
-    final color = isActive
-        ? Theme.of(context).colorScheme.primary
-        : Colors.grey.shade500;
+    final color =
+        isActive ? Theme.of(context).colorScheme.primary : Colors.grey.shade500;
 
     return BottomNavigationBarItem(
       label: label,
@@ -101,5 +87,4 @@ class CustomBottomNav extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -7,6 +7,8 @@ import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_app_bar.dar
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_bottom_nav.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_drawer.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_side_bar.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
+import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,29 +23,59 @@ class AppShellPage extends StatefulWidget {
 class _AppShellPageState extends State<AppShellPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  TabsRouter? _tabsRouter;
+  int _lastIndex = -1;
+
   @override
   void initState() {
     super.initState();
+
     context.read<HomeBloc>().add(LoadUserProfileEvent());
+  }
+
+  void _onTabChanged() {
+    if (_tabsRouter == null) return;
+
+    final currentIndex = _tabsRouter!.activeIndex;
+
+    if (_lastIndex == currentIndex) return;
+
+    _lastIndex = currentIndex;
+
+    if (currentIndex == 0) {
+      context.read<ContactsBloc>().add(LoadContacts());
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabsRouter?.removeListener(_onTabChanged);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        HomeTabRoute(),
         ContactsTabRoute(),
+        CallsTabRoute(),
         ShowQrRoute(),
         SettingsRoute(),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
 
+        if (_tabsRouter != tabsRouter) {
+          _tabsRouter?.removeListener(_onTabChanged);
+          _tabsRouter = tabsRouter;
+          _tabsRouter!.addListener(_onTabChanged);
+        }
+
         return Scaffold(
           key: scaffoldKey,
           appBar: CustomAppBar(
             scaffoldKey: scaffoldKey,
-            index: AutoTabsRouter.of(context).activeIndex,
+            index: tabsRouter.activeIndex,
           ),
           endDrawer: isDesktop(context) ? const CustomDrawer() : null,
           body: Center(

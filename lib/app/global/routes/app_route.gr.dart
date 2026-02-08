@@ -11,22 +11,6 @@
 part of 'app_route.dart';
 
 /// generated route for
-/// [AddContactsPage]
-class AddContactsRoute extends PageRouteInfo<void> {
-  const AddContactsRoute({List<PageRouteInfo>? children})
-      : super(AddContactsRoute.name, initialChildren: children);
-
-  static const String name = 'AddContactsRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const AddContactsPage();
-    },
-  );
-}
-
-/// generated route for
 /// [AppShellPage]
 class AppShellRoute extends PageRouteInfo<void> {
   const AppShellRoute({List<PageRouteInfo>? children})
@@ -38,6 +22,22 @@ class AppShellRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const AppShellPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CallsTabPage]
+class CallsTabRoute extends PageRouteInfo<void> {
+  const CallsTabRoute({List<PageRouteInfo>? children})
+      : super(CallsTabRoute.name, initialChildren: children);
+
+  static const String name = 'CallsTabRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CallsTabPage();
     },
   );
 }

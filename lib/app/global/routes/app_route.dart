@@ -4,13 +4,13 @@ import 'package:chat_app_fe/app/core/auth/authservice.dart';
 import 'package:chat_app_fe/app/core/auth/guestguard.dart';
 import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/api_extensions.dart';
+import 'package:chat_app_fe/app/view/features/Calls/ui/calls_tab_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_page.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_desktop.dart';
 import 'package:chat_app_fe/app/view/features/Login/ui/pages/login_page_mobile.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/pages/contact_chat_page.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/pages/contact_page.dart';
 import 'package:chat_app_fe/app_shell_page.dart';
-import 'package:chat_app_fe/app/view/features/Contacts/ui/add_contacts_page.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/pages/home_tab_page.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/contacts_tab_page.dart';
 import 'package:chat_app_fe/app/view/features/Settings/ui/settings_page.dart';
@@ -43,27 +43,23 @@ class AppRoute extends RootStackRouter {
       ],
       children: [
         CustomRoute(
-            page: HomeTabRoute.page,
-            duration: 300.milliseconds,
-            transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-            path: '',
-            guards: [
-              Authguard(
-                localstorage: getIt<Localstorage>(),
-                authservice: getIt<Authservice>(),
-              ),
-            ],
-            children: [
-              CustomRoute(
-                page: HomeRoute.page,
-                initial: true,
-              ),
-            ]),
+          page: CallsTabRoute.page,
+          duration: 300.milliseconds,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          path: 'calls',
+          guards: [
+            Authguard(
+              localstorage: getIt<Localstorage>(),
+              authservice: getIt<Authservice>(),
+            ),
+          ],
+        ),
         CustomRoute(
             page: ContactsTabRoute.page,
             duration: 300.milliseconds,
             transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-            path: 'contacts',
+            path: '',
+            initial: true,
             guards: [
               Authguard(
                 localstorage: getIt<Localstorage>(),
@@ -72,8 +68,8 @@ class AppRoute extends RootStackRouter {
             ],
             children: [
               CustomRoute(page: ContactRoute.page, initial: true),
-              CustomRoute(page: ContactChatRoute.page,
-              path: 'contact-chat/:contactId')
+              CustomRoute(
+                  page: ContactChatRoute.page, path: 'contact-chat/:contactId')
             ]),
         CustomRoute(
           page: ShowQrRoute.page,
