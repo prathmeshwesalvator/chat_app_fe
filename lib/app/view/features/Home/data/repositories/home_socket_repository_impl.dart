@@ -17,11 +17,11 @@ class HomeSocketRepositoryImpl implements HomeSocketRepositories {
   });
 
   @override
-  Future<void> connect() async {
+  Future<void> connect({required String roomName}) async {
     final token = await localstorage.getToken();
 
     websocketService.connect(
-      url: Uri.parse(ApiConstants.webSocketUrl)
+      url: Uri.parse('${ApiConstants.webSocketUrl}/$roomName/')
           .replace(queryParameters: {'token': token}),
     );
   }

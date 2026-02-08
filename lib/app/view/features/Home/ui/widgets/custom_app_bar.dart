@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/theme/bloc/theme_cubit.dart';
 import 'package:chat_app_fe/app/global/utils/device_identification.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';
-import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -39,49 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         )
       else
-        PopupMenuButton<AppBarMenu>(
-          icon: CircleAvatar(
-            backgroundColor: theme.colorScheme.surface,
-            child: Icon(Icons.person_outline, color: theme.colorScheme.primary),
-          ),
-          onSelected: (value) {
-            switch (value) {
-              case AppBarMenu.theme:
-                break;
-
-              case AppBarMenu.logout:
-                context.read<HomeBloc>().add(LogoutUserEvent());
-
-                /// Delay navigation until menu closes
-                context.router.replace(const LoginRoute());
-                break;
-            }
-          },
-          itemBuilder: (_) => [
-            const PopupMenuItem(
-              value: AppBarMenu.theme,
-              child: Row(
-                children: [
-                  Icon(Icons.nightlight),
-                  SizedBox(width: 10),
-                  Text('Theme'),
-                ],
-              ),
-            ),
-            const PopupMenuDivider(),
-            const PopupMenuItem(
-              value: AppBarMenu.logout,
-              child: Row(
-                children: [
-                  Icon(Icons.logout_outlined, color: Colors.red),
-                  SizedBox(width: 10),
-                  Text('Log Out', style: TextStyle(color: Colors.red)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      const SizedBox(width: 8),
+        const SizedBox()
     ];
 
     switch (index) {
@@ -119,6 +74,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
       ),
       actions: actionList,
+      actionsPadding: const EdgeInsets.all(8),
     );
   }
 

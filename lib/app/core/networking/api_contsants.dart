@@ -6,7 +6,7 @@ class ApiConstants {
 
   static const String baseUrl = 'https://chat-app-be-b7cs.onrender.com';
   static const String webSocketUrl =
-      'wss://chat-app-be-b7cs.onrender.com/ws/chat/general/';
+      'wss://chat-app-be-b7cs.onrender.com/ws/chat';
 
 
   static const String contentType = 'content-type';

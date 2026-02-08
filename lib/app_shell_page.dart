@@ -79,19 +79,16 @@ class _AppShellPageState extends State<AppShellPage> {
           ),
           endDrawer: isDesktop(context) ? const CustomDrawer() : null,
           body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: isDesktop(context)
-                  ? Row(
-                      spacing: 16,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Expanded(child: CustomSideBar()),
-                        Expanded(flex: 2, child: child),
-                      ],
-                    )
-                  : child,
-            ),
+            child: isDesktop(context)
+                ? Row(
+                    spacing: 16,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Expanded(child: CustomSideBar()),
+                      Expanded(flex: 2, child: child),
+                    ],
+                  )
+                : child,
           ),
           bottomNavigationBar: isDesktop(context)
               ? null

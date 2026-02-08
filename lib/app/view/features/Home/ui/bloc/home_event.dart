@@ -6,7 +6,11 @@ class LoadUserProfileEvent extends HomeEvent {}
 
 class LogoutUserEvent extends HomeEvent {}
 
-class ConnectSocketEvent extends HomeEvent {}
+class ConnectSocketEvent extends HomeEvent {
+  final String roomName;
+
+  ConnectSocketEvent({required this.roomName});
+}
 
 class DisconnectSocketEvent extends HomeEvent {}
 
@@ -22,10 +26,8 @@ class SendMessageEvent extends HomeEvent {
   });
 }
 
-
 class MessageReceivedEvent extends HomeEvent {
   final dynamic message;
 
   const MessageReceivedEvent(this.message);
-
 }

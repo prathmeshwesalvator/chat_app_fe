@@ -48,11 +48,19 @@ class ContactChatRoute extends PageRouteInfo<ContactChatRouteArgs> {
   ContactChatRoute({
     Key? key,
     required int contactId,
+    required String contactUsername,
     List<PageRouteInfo>? children,
   }) : super(
           ContactChatRoute.name,
-          args: ContactChatRouteArgs(key: key, contactId: contactId),
-          rawPathParams: {'contactId': contactId},
+          args: ContactChatRouteArgs(
+            key: key,
+            contactId: contactId,
+            contactUsername: contactUsername,
+          ),
+          rawPathParams: {
+            'contactId': contactId,
+            'contactUsername': contactUsername,
+          },
           initialChildren: children,
         );
 
@@ -63,35 +71,50 @@ class ContactChatRoute extends PageRouteInfo<ContactChatRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<ContactChatRouteArgs>(
-        orElse: () =>
-            ContactChatRouteArgs(contactId: pathParams.getInt('contactId')),
+        orElse: () => ContactChatRouteArgs(
+          contactId: pathParams.getInt('contactId'),
+          contactUsername: pathParams.getString('contactUsername'),
+        ),
       );
-      return ContactChatPage(key: args.key, contactId: args.contactId);
+      return ContactChatPage(
+        key: args.key,
+        contactId: args.contactId,
+        contactUsername: args.contactUsername,
+      );
     },
   );
 }
 
 class ContactChatRouteArgs {
-  const ContactChatRouteArgs({this.key, required this.contactId});
+  const ContactChatRouteArgs({
+    this.key,
+    required this.contactId,
+    required this.contactUsername,
+  });
 
   final Key? key;
 
   final int contactId;
 
+  final String contactUsername;
+
   @override
   String toString() {
-    return 'ContactChatRouteArgs{key: $key, contactId: $contactId}';
+    return 'ContactChatRouteArgs{key: $key, contactId: $contactId, contactUsername: $contactUsername}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! ContactChatRouteArgs) return false;
-    return key == other.key && contactId == other.contactId;
+    return key == other.key &&
+        contactId == other.contactId &&
+        contactUsername == other.contactUsername;
   }
 
   @override
-  int get hashCode => key.hashCode ^ contactId.hashCode;
+  int get hashCode =>
+      key.hashCode ^ contactId.hashCode ^ contactUsername.hashCode;
 }
 
 /// generated route for
@@ -122,22 +145,6 @@ class ContactsTabRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const ContactsTabPage();
-    },
-  );
-}
-
-/// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(HomeRoute.name, initialChildren: children);
-
-  static const String name = 'HomeRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const HomePage();
     },
   );
 }

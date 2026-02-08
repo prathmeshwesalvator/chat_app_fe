@@ -14,10 +14,7 @@ class HomeTabPage extends StatefulWidget {
 
 class _HomeTabPageState extends State<HomeTabPage> {
   @override
-  void initState() {
-    context.read<HomeBloc>().add(ConnectSocketEvent());
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

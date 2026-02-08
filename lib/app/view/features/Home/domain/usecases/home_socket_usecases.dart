@@ -2,7 +2,7 @@ import 'package:chat_app_fe/app/view/features/Home/domain/entities/message_entit
 import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_socket_repositories.dart';
 
 abstract class HomeSocketUsecases {
-  Future<void> connect();
+  Future<void> connect({required String roomName});
   Stream<MessageEntities> messages();
   void sendMessage({
     required int sender,
@@ -18,7 +18,7 @@ class HomeSocketUsecasesImpl implements HomeSocketUsecases {
   HomeSocketUsecasesImpl({required this.homeSocketRepositories});
 
   @override
-  Future<void> connect() => homeSocketRepositories.connect();
+  Future<void> connect({required String roomName}) => homeSocketRepositories.connect(roomName: roomName);
 
   @override
   Stream<MessageEntities> messages() => homeSocketRepositories.messages();

@@ -76,7 +76,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     ConnectSocketEvent event,
     Emitter<HomeState> emit,
   ) async {
-    await homeSocketUsecases.connect();
+    await homeSocketUsecases.connect(roomName: event.roomName);
 
     await _streamSubscription?.cancel();
 
@@ -99,7 +99,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     SendMessageEvent event,
     Emitter<HomeState> emit,
   ) {
-
     homeSocketUsecases.sendMessage(
       sender: event.sender,
       receiver: event.receiver,
