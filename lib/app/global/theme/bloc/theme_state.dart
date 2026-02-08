@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ThemeState {
+class AppGlobalState {
   final ThemeMode appTheme;
+  final bool hapticFeedback;
 
-  ThemeState({required this.appTheme});
+  AppGlobalState({required this.appTheme, required this.hapticFeedback});
 
-  factory ThemeState.initial() => ThemeState(appTheme: ThemeMode.light);
+  factory AppGlobalState.initial() =>
+      AppGlobalState(appTheme: ThemeMode.light, hapticFeedback: false);
 
-  ThemeState copyWith({ThemeMode? appTheme}) {
-    return ThemeState(appTheme: appTheme ?? this.appTheme);
+  AppGlobalState copyWith({ThemeMode? appTheme, bool? hapticFeedback}) {
+    return AppGlobalState(
+        appTheme: appTheme ?? this.appTheme,
+        hapticFeedback: hapticFeedback ?? this.hapticFeedback);
   }
 }

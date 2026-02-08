@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
                 ContactsBloc(contactUsecases: getIt<ContactUsecases>())),
         BlocProvider(create: (_) => QrBloc(qrUsecases: getIt<QrUsecases>())),
         BlocProvider(
-          create: (_) => ThemeCubit(),
+          create: (_) => AppGlobalCubit(),
         )
       ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
+      child: BlocBuilder<AppGlobalCubit, AppGlobalState>(
         builder: (context, state) {
           return MaterialApp.router(
             // showPerformanceOverlay: true,

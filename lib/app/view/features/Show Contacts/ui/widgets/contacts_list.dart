@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/global/enums/blocstatus.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
+import 'package:chat_app_fe/app/global/utils/haptic_feedback.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_event.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/ui/bloc/contacts_state.dart';
@@ -104,49 +105,46 @@ class _ContactsListState extends State<ContactsList>
         ? Colors.white.withOpacity(0.12)
         : Colors.white.withOpacity(0.6);
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            decoration: BoxDecoration(
-              color: glassColor,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: borderColor, width: 1.5),
-            ),
-            child: TextField(
-              controller: _searchController,
-              style: theme.textTheme.bodyLarge,
-              decoration: InputDecoration(
-                hintText: 'Search contacts...',
-                hintStyle: TextStyle(
-                  color: colorScheme.onSurface.withOpacity(0.5),
-                ),
-                prefixIcon: Icon(
-                  CupertinoIcons.search,
-                  color: colorScheme.onSurface.withOpacity(0.6),
-                ),
-                suffixIcon: _searchQuery.isNotEmpty
-                    ? IconButton(
-                        icon: Icon(
-                          CupertinoIcons.xmark_circle_fill,
-                          color: colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                        onPressed: () {
-                          _searchController.clear();
-                          FocusScope.of(context).unfocus();
-                        },
-                      )
-                    : null,
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: glassColor,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: borderColor, width: 1.5),
+          ),
+          child: TextField(
+            controller: _searchController,
+            style: theme.textTheme.bodyLarge,
+            decoration: InputDecoration(
+              hintText: 'Search contacts...',
+              hintStyle: TextStyle(
+                color: colorScheme.onSurface.withOpacity(0.5),
               ),
-              onChanged: (_) {
-                setState(() {});
-              },
+              prefixIcon: Icon(
+                CupertinoIcons.search,
+                color: colorScheme.onSurface.withOpacity(0.6),
+              ),
+              suffixIcon: _searchQuery.isNotEmpty
+                  ? IconButton(
+                      icon: Icon(
+                        CupertinoIcons.xmark_circle_fill,
+                        color: colorScheme.onSurface.withOpacity(0.6),
+                      ),
+                      onPressed: () {
+                        _searchController.clear();
+                        FocusScope.of(context).unfocus();
+                      },
+                    )
+                  : null,
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(vertical: 16),
             ),
+            onChanged: (_) {
+              setState(() {});
+            },
           ),
         ),
       ),
@@ -233,8 +231,7 @@ class _ContactsListState extends State<ContactsList>
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 onPressed: () {
                   _errorAnimationController.reverse();
-                  // Retry loading
-                  // context.read<ContactsBloc>().add(LoadContacts());
+                  context.read<ContactsBloc>().add(LoadContacts());
                 },
                 child: const Text(
                   'Try Again',
@@ -337,35 +334,31 @@ class _ContactsListState extends State<ContactsList>
           );
         }
 
-        // Success state with contacts
         return Column(
+          spacing: 4,
           children: [
             _buildSearchBar(theme, colorScheme, brightness),
 
-            // Contact count chip
             if (filteredContacts.isNotEmpty)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: colorScheme.primaryContainer.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '${filteredContacts.length} ${filteredContacts.length == 1 ? 'contact' : 'contacts'}',
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.w600,
-                        ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: colorScheme.primaryContainer.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      '${filteredContacts.length} ${filteredContacts.length == 1 ? 'contact' : 'contacts'}',
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
 
             Expanded(
@@ -406,7 +399,7 @@ class _ContactsListState extends State<ContactsList>
                                   contact: contact,
                                   onTap: () {
                                     try {
-                                      HapticFeedback.lightImpact();
+                                      context.hapticLight();
                                       context.router.push(
                                         ContactChatRoute(
                                           contactId: contact.contactUserId,

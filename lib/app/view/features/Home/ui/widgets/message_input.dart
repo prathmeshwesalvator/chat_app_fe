@@ -83,7 +83,7 @@ class _MessageInputState extends State<MessageInput> {
                 decoration: InputDecoration(
                   hintText: 'Type a message...',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withAlpha((0.4 * 255).round()),
+                  fillColor: theme.colorScheme.surfaceContainerHighest.withAlpha((0.4 * 255).round()),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 12,

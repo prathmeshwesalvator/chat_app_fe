@@ -55,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
-              context.read<ThemeCubit>().state.appTheme == ThemeMode.dark
+              context.read<AppGlobalCubit>().state.appTheme == ThemeMode.dark
                   ? 'assets/logo_icon_dark.svg'
                   : 'assets/logo_icon_light.svg',
             ),

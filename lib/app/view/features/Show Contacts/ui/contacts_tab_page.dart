@@ -21,6 +21,9 @@ class _ContactsTabPageState extends State<ContactsTabPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(child: AutoRouter());
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: SafeArea(child: AutoRouter()),
+    );
   }
 }
