@@ -1,5 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/chat_tile.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +27,8 @@ class _CustomSideBarState extends State<CustomSideBar> {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         border: Border(
-          right: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
-          left: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
+          right: BorderSide(color: theme.dividerColor.withAlpha((0.2 * 255).round())),
+            left: BorderSide(color: theme.dividerColor.withAlpha((0.2 * 255).round())),
         ),
       ),
       child: SafeArea(
@@ -52,7 +50,7 @@ class _CustomSideBarState extends State<CustomSideBar> {
             SliverToBoxAdapter(
               child: Divider(
                 height: 1,
-                color: theme.dividerColor.withOpacity(0.2),
+                color: theme.dividerColor.withAlpha((0.2 * 255).round()),
               ),
             ),
 
@@ -73,7 +71,7 @@ class _CustomSideBarState extends State<CustomSideBar> {
                     Icon(
                       Icons.chat_bubble_outline,
                       size: 18,
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                      color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
                     ),
                   ],
                 ),
@@ -94,24 +92,6 @@ class _CustomSideBarState extends State<CustomSideBar> {
                 );
               }, childCount: 600),
             ),
-
-            // ListView.builder(
-            //   itemExtent: 60,
-            //   cacheExtent: 60,
-            //   padding: const EdgeInsets.symmetric(horizontal: 8),
-            //   physics: const BouncingScrollPhysics(),
-
-            //   itemCount: 600,
-            //   itemBuilder: (context, index) {
-            //     return RepaintBoundary(
-            //       child: ChatTile(
-            //         name: 'User $index',
-            //         lastMessage: 'Last message preview...',
-            //         time: '12:${index}0 PM',
-            //       ),
-            //     );
-            //   },
-            // ),
           ],
         ),
       ),

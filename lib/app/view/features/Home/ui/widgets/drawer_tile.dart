@@ -45,7 +45,7 @@ Widget bottomNavTile(
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
+                  color: Colors.black.withAlpha((0.25 * 255).round()),
                   blurRadius: 10,
                   offset: const Offset(0, 6),
                 ),

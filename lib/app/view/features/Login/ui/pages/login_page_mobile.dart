@@ -94,7 +94,7 @@ class _LoginPageMobileState extends State<LoginPageMobile> {
                           Text(
                             'Private • Fast • Secure',
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colors.onPrimary.withOpacity(0.75),
+                              color: colors.onPrimary.withAlpha((0.75 * 255).round()),
                             ),
                           ),
 
@@ -111,7 +111,7 @@ class _LoginPageMobileState extends State<LoginPageMobile> {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.12),
+                                  color: Colors.black.withAlpha((0.12 * 255).round()),
                                   blurRadius: 20,
                                   offset: const Offset(0, -4),
                                 ),

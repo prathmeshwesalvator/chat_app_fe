@@ -15,7 +15,7 @@ class CustomBottomNav extends StatelessWidget {
         color: theme.scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withAlpha((0.08 * 255).round()),
             blurRadius: 20,
             offset: const Offset(0, -4),
           ),
@@ -78,9 +78,9 @@ class CustomBottomNav extends StatelessWidget {
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isActive
-              ? Theme.of(context).colorScheme.primary.withOpacity(0.12)
-              : Colors.transparent,
+      color: isActive
+        ? Theme.of(context).colorScheme.primary.withAlpha((0.12 * 255).round())
+        : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: color),

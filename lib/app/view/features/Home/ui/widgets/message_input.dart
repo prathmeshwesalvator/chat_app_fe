@@ -48,9 +48,9 @@ class _MessageInputState extends State<MessageInput> {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
 
           /// 🔹 Subtle elevation from bottom
-          boxShadow: [
+            boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withAlpha((0.06 * 255).round()),
               blurRadius: 10,
               offset: const Offset(0, -3),
             ),
@@ -58,7 +58,7 @@ class _MessageInputState extends State<MessageInput> {
 
           /// 🔹 Hairline top separator (very premium touch)
           border: Border(
-            top: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
+            top: BorderSide(color: theme.dividerColor.withAlpha((0.15 * 255).round())),
           ),
         ),
         child: Row(
@@ -83,7 +83,7 @@ class _MessageInputState extends State<MessageInput> {
                 decoration: InputDecoration(
                   hintText: 'Type a message...',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.4),
+                  fillColor: theme.colorScheme.surfaceVariant.withAlpha((0.4 * 255).round()),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 12,
@@ -106,7 +106,7 @@ class _MessageInputState extends State<MessageInput> {
                 radius: 22,
                 backgroundColor: hasText
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.primary.withOpacity(0.4),
+                    : theme.colorScheme.primary.withAlpha((0.4 * 255).round()),
                 child: IconButton(
                   icon: Icon(
                     Icons.send_rounded,

@@ -1,4 +1,4 @@
-import 'package:chat_app_fe/app/core/di/setupLocator.dart';
+import 'package:chat_app_fe/app/core/di/setup_locator.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/theme/app_theme.dart';
 import 'package:chat_app_fe/app/global/theme/bloc/theme_cubit.dart';

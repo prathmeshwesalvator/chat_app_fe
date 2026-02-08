@@ -97,7 +97,7 @@ class _ShowQrPageState extends State<ShowQrPage> {
               children: [
                 Card(
                   elevation: 10,
-                  shadowColor: colorScheme.primary.withOpacity(.2),
+                  shadowColor: colorScheme.primary.withAlpha((.2 * 255).round()),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(22),
                   ),
@@ -202,7 +202,7 @@ class _AvatarSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 48,
-      backgroundColor: colorScheme.primary.withOpacity(.1),
+  backgroundColor: colorScheme.primary.withAlpha((.1 * 255).round()),
       child: Icon(
         Icons.person,
         size: 42,

@@ -89,12 +89,12 @@ class _MessageBubble extends StatelessWidget {
                 horizontal: 14,
                 vertical: 10,
               ),
-              decoration: BoxDecoration(
-                color: isMe
-                    ? theme.colorScheme.primary
-                    : theme.brightness == Brightness.light
-                        ? theme.colorScheme.primary.withOpacity(0.08)
-                        : theme.colorScheme.surfaceVariant,
+        decoration: BoxDecoration(
+        color: isMe
+          ? theme.colorScheme.primary
+          : theme.brightness == Brightness.light
+            ? theme.colorScheme.primary.withAlpha((0.08 * 255).round())
+            : theme.colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(18),
                   topRight: const Radius.circular(18),
@@ -121,10 +121,10 @@ class _MessageBubble extends StatelessWidget {
                     Text(
                       'check',
                       style: theme.textTheme.labelSmall?.copyWith(
-                        color: isMe
-                            ? theme.colorScheme.onPrimary.withOpacity(0.7)
-                            : theme.colorScheme.onSurfaceVariant
-                                .withOpacity(0.7),
+              color: isMe
+                ? theme.colorScheme.onPrimary.withAlpha((0.7 * 255).round())
+                : theme.colorScheme.onSurfaceVariant
+                  .withAlpha((0.7 * 255).round()),
                       ),
                     ),
                 ],

@@ -13,7 +13,7 @@ class HeaderBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         border: Border(
-          bottom: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
+          bottom: BorderSide(color: theme.dividerColor.withAlpha((0.15 * 255).round())),
         ),
       ),
       child: Row(
@@ -22,7 +22,7 @@ class HeaderBar extends StatelessWidget {
           /// 👤 Profile Avatar
           CircleAvatar(
             radius: 18,
-            backgroundColor: theme.colorScheme.primary.withOpacity(0.15),
+            backgroundColor: theme.colorScheme.primary.withAlpha((0.15 * 255).round()),
             child: Icon(
               Icons.person,
               size: 18,

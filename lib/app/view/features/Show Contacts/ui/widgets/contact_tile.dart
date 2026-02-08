@@ -36,10 +36,10 @@ class _ContactTileState extends State<ContactTile> {
           child: Container(
             margin: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest.withOpacity(0.4),
+              color: colorScheme.surfaceContainerHighest.withAlpha((0.4 * 255).round()),
               borderRadius: BorderRadius.circular(20), // More rounded
               border: Border.all(
-                color: colorScheme.outlineVariant.withOpacity(0.5),
+                color: colorScheme.outlineVariant.withAlpha((0.5 * 255).round()),
               ),
             ),
             child: Padding(
@@ -113,7 +113,7 @@ class _Avatar extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withAlpha((0.1 * 255).round()),
             blurRadius: 8,
             offset: const Offset(0, 3),
           ),

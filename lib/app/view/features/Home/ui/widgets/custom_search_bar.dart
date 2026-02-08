@@ -43,13 +43,13 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       hintText: 'Search chats, contacts...',
       hintStyle: WidgetStateProperty.all(
         theme.textTheme.bodyMedium?.copyWith(
-          color: theme.colorScheme.onSurface.withOpacity(0.6),
+          color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
         ),
       ),
     
       leading: Icon(
         Icons.search,
-        color: theme.colorScheme.onSurface.withOpacity(0.6),
+        color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
       ),
     
       trailing: [

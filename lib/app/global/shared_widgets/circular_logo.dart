@@ -195,13 +195,13 @@ class _CircularLogoState extends State<CircularLogo>
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      theme.colorScheme.primary.withOpacity(0.4),
-                      theme.colorScheme.secondary.withOpacity(0.3),
+                      theme.colorScheme.primary.withAlpha((0.4 * 255).round()),
+                      theme.colorScheme.secondary.withAlpha((0.3 * 255).round()),
                     ],
                   ),
               boxShadow: [
                 BoxShadow(
-                  color: effectiveShadowColor.withOpacity(0.35),
+                  color: effectiveShadowColor.withAlpha((0.35 * 255).round()),
                   blurRadius: 32,
                   spreadRadius: 6,
                 ),
@@ -220,9 +220,9 @@ class _CircularLogoState extends State<CircularLogo>
                 LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [
-                    theme.colorScheme.primary.withOpacity(0.45),
-                    theme.colorScheme.secondary.withOpacity(0.35),
+                    colors: [
+                    theme.colorScheme.primary.withAlpha((0.45 * 255).round()),
+                    theme.colorScheme.secondary.withAlpha((0.35 * 255).round()),
                   ],
                 ),
           ),
@@ -234,8 +234,8 @@ class _CircularLogoState extends State<CircularLogo>
           height: widget.size * 0.6,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: widget.backgroundColor ?? 
-                theme.colorScheme.primary.withOpacity(0.85),
+      color: widget.backgroundColor ?? 
+        theme.colorScheme.primary.withAlpha((0.85 * 255).round()),
             border: widget.borderWidth > 0
                 ? Border.all(
                     color: effectiveBorderColor,
@@ -245,13 +245,13 @@ class _CircularLogoState extends State<CircularLogo>
             boxShadow: [
               if (!_isPressed)
                 BoxShadow(
-                  color: effectiveShadowColor.withOpacity(0.4),
+                  color: effectiveShadowColor.withAlpha((0.4 * 255).round()),
                   blurRadius: 18,
                   spreadRadius: 2,
                 ),
               if (_isHovered && widget.hoverEffect)
                 BoxShadow(
-                  color: effectiveShadowColor.withOpacity(0.6),
+                  color: effectiveShadowColor.withAlpha((0.6 * 255).round()),
                   blurRadius: 24,
                   spreadRadius: 4,
                 ),
@@ -260,9 +260,9 @@ class _CircularLogoState extends State<CircularLogo>
           child: Icon(
             widget.icon,
             size: widget.size * widget.iconSizeFactor,
-            color: _isPressed 
-                ? effectiveIconColor.withOpacity(0.8)
-                : effectiveIconColor,
+      color: _isPressed 
+        ? effectiveIconColor.withAlpha((0.8 * 255).round())
+        : effectiveIconColor,
           ),
         ),
 
@@ -370,7 +370,6 @@ class EnhancedLogoExample extends StatelessWidget {
             CircularLogo(
               size: 150,
               icon: Icons.notifications,
-              onTap: () => print('Logo tapped!'),
               hoverEffect: true,
               animate: true,
               pulseAnimation: true,

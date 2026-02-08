@@ -3,7 +3,7 @@ import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_bloc.dart
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_event.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_state.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/manual_mail_dialog.dart';
-import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/qr-scanner_page.dart';
+import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/widgets/qr_scanner_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

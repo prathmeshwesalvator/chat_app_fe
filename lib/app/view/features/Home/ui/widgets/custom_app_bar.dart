@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app_fe/app/global/routes/app_route.dart';
-import 'package:chat_app_fe/app/global/theme/app_theme.dart';
 import 'package:chat_app_fe/app/global/theme/bloc/theme_cubit.dart';
 import 'package:chat_app_fe/app/global/utils/device_identification.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';

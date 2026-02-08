@@ -1,5 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:flutter/material.dart';
 
 class ChatTile extends StatelessWidget {
@@ -56,7 +54,7 @@ class ChatTile extends StatelessWidget {
                   Text(
                     lastMessage,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                      color: theme.colorScheme.onSurface.withAlpha((0.6 * 255).round()),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -70,8 +68,8 @@ class ChatTile extends StatelessWidget {
             /// Time
             Text(
               time,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurface.withAlpha((0.5 * 255).round()),
               ),
             ),
           ],

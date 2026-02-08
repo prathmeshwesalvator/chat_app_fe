@@ -96,20 +96,20 @@ class _LoginPageDesktopState extends State<LoginPageDesktop> {
                               'Real-time messaging.\n'
                               'Built for teams.',
                               style: theme.textTheme.titleLarge?.copyWith(
-                                color: colors.onPrimary.withOpacity(0.9),
+                                color: colors.onPrimary.withAlpha((0.9 * 255).round()),
                                 height: 1.5,
                               ),
                             ),
                             const SizedBox(height: 32),
                             Divider(
-                              color: colors.onPrimary.withOpacity(0.2),
+                              color: colors.onPrimary.withAlpha((0.2 * 255).round()),
                               thickness: 1,
                             ),
                             const SizedBox(height: 16),
                             Text(
                               'Enterprise-grade chat platform',
                               style: theme.textTheme.bodyLarge?.copyWith(
-                                color: colors.onPrimary.withOpacity(0.7),
+                                color: colors.onPrimary.withAlpha((0.7 * 255).round()),
                               ),
                             ),
                           ],
@@ -150,7 +150,7 @@ class _LoginPageDesktopState extends State<LoginPageDesktop> {
                           Text(
                             'Sign in to continue to ChatSphere',
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colors.onSurfaceVariant.withOpacity(0.8),
+                              color: colors.onSurfaceVariant.withAlpha((0.8 * 255).round()),
                             ),
                           ),
 

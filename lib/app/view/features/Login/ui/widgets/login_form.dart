@@ -41,9 +41,9 @@ class _LoginFormState extends State<LoginForm> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
-            color: isDarkMode
-                ? Colors.grey[900]!.withOpacity(0.8)
-                : Colors.white.withOpacity(0.95),
+      color: isDarkMode
+        ? Colors.grey[900]!.withAlpha((0.8 * 255).round())
+        : Colors.white.withAlpha((0.95 * 255).round()),
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Form(
@@ -58,7 +58,7 @@ class _LoginFormState extends State<LoginForm> {
                       textAlign: TextAlign.center,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -66,7 +66,7 @@ class _LoginFormState extends State<LoginForm> {
                       'Sign in to continue to ChatSphere',
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.7),
+                        color: theme.colorScheme.onSurface.withAlpha((0.7 * 255).round()),
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -267,7 +267,7 @@ class _LoginFormState extends State<LoginForm> {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: theme.colorScheme.outline.withOpacity(0.3),
+                            color: theme.colorScheme.outline.withAlpha((0.3 * 255).round()),
                           ),
                         ),
                         Padding(
@@ -275,15 +275,15 @@ class _LoginFormState extends State<LoginForm> {
                           child: Text(
                             'or continue with',
                             style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.onSurface.withOpacity(
-                                0.6,
+                              color: theme.colorScheme.onSurface.withAlpha(
+                                (0.6 * 255).round(),
                               ),
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: theme.colorScheme.outline.withOpacity(0.3),
+                            color: theme.colorScheme.outline.withAlpha((0.3 * 255).round()),
                           ),
                         ),
                       ],
@@ -303,7 +303,7 @@ class _LoginFormState extends State<LoginForm> {
                                 "Don't have an account? ",
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                   color: theme.colorScheme.onSurface
-                                      .withOpacity(0.7),
+                                      .withAlpha((0.7 * 255).round()),
                                 ),
                               ),
                               TextButton(

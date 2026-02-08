@@ -99,7 +99,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     SendMessageEvent event,
     Emitter<HomeState> emit,
   ) {
-    print('copming here ');
 
     homeSocketUsecases.sendMessage(
       sender: event.sender,

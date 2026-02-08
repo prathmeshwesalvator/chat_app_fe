@@ -37,6 +37,7 @@ class QrDatasourceImpl implements QrDatasource {
     }
   }
 
+  @override
   Future<ContactModel> addContact({required Map<String, dynamic> body}) async {
     try {
       final response = await qrAnalysisService.addContact(body);
