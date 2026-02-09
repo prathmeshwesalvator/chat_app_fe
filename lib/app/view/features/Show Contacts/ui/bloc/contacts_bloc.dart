@@ -40,5 +40,18 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
             contactStatus: Blocstatus.success, contacts: updatedContacts));
       },
     );
+
+    on<DeleteContact>((event, emit) async {
+      emit(state.copyWith(deleteStatus: Blocstatus.loading));
+
+      final response = await contactUsecases.deleteContact(event.contactUserId);
+
+      response.fold((l) {
+        emit(state.copyWith(errroMessage: l.toString()));
+      }, (r) {
+        emit(state.copyWith(deleteStatus: Blocstatus.success));
+      });
+    }
+  );
   }
 }

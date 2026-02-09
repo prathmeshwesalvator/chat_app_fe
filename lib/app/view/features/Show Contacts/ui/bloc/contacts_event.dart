@@ -6,6 +6,10 @@ class LoadContacts extends ContactsEvent {}
 
 class UpdateContacts extends ContactsEvent {
   final ContactEntities contact;
-
   UpdateContacts({required this.contact});
+}
+
+class DeleteContact extends ContactsEvent {
+  final int contactUserId;
+  DeleteContact({required this.contactUserId});
 }

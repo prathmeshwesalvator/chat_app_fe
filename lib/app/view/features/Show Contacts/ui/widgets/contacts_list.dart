@@ -95,6 +95,28 @@ class _ContactsListState extends State<ContactsList>
     );
   }
 
+  void _showSuccessSnackBar(String message) {
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.check_circle, color: Colors.white),
+            const SizedBox(width: 12),
+            Expanded(child: Text(message)),
+          ],
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   Widget _buildSearchBar(
       ThemeData theme, ColorScheme colorScheme, Brightness brightness) {
     final glassColor = brightness == Brightness.dark
@@ -253,7 +275,9 @@ class _ContactsListState extends State<ContactsList>
 
     return BlocConsumer<ContactsBloc, ContactsState>(
       listener: (context, state) {
-        // Handle errors
+        if (state.deleteStatus == Blocstatus.success) {
+          _showSuccessSnackBar("Contact deleted successfully");
+        }
         if (state.contactStatus == Blocstatus.error) {
           _errorAnimationController.forward();
           _showErrorSnackBar(state.errroMessage);
@@ -338,14 +362,13 @@ class _ContactsListState extends State<ContactsList>
           spacing: 4,
           children: [
             _buildSearchBar(theme, colorScheme, brightness),
-
             if (filteredContacts.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: colorScheme.primaryContainer.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(12),
@@ -360,7 +383,6 @@ class _ContactsListState extends State<ContactsList>
                   ),
                 ],
               ),
-
             Expanded(
               child: RefreshIndicator(
                 onRefresh: _handleRefresh,
@@ -412,6 +434,12 @@ class _ContactsListState extends State<ContactsList>
                                         'Failed to open chat: ${e.toString()}',
                                       );
                                     }
+                                  },
+                                  onDeleteTap: () {
+                                    context.read<ContactsBloc>().add(
+                                        DeleteContact(
+                                            contactUserId:
+                                                contact.contactUserId));
                                   },
                                 ),
                               );

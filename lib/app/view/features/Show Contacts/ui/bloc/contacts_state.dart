@@ -9,6 +9,7 @@ abstract class ContactsState with _$ContactsState {
   const factory ContactsState({
     @Default([]) final List<ContactEntities> contacts,
     Blocstatus? contactStatus,
+    Blocstatus? deleteStatus,
     @Default('') final String errroMessage,
   }) = _ContactsState;
 }

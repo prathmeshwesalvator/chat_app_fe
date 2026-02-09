@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$ContactsState {
   List<ContactEntities> get contacts;
   Blocstatus? get contactStatus;
+  Blocstatus? get deleteStatus;
   String get errroMessage;
 
   /// Create a copy of ContactsState
@@ -34,6 +35,8 @@ mixin _$ContactsState {
             const DeepCollectionEquality().equals(other.contacts, contacts) &&
             (identical(other.contactStatus, contactStatus) ||
                 other.contactStatus == contactStatus) &&
+            (identical(other.deleteStatus, deleteStatus) ||
+                other.deleteStatus == deleteStatus) &&
             (identical(other.errroMessage, errroMessage) ||
                 other.errroMessage == errroMessage));
   }
@@ -43,11 +46,12 @@ mixin _$ContactsState {
       runtimeType,
       const DeepCollectionEquality().hash(contacts),
       contactStatus,
+      deleteStatus,
       errroMessage);
 
   @override
   String toString() {
-    return 'ContactsState(contacts: $contacts, contactStatus: $contactStatus, errroMessage: $errroMessage)';
+    return 'ContactsState(contacts: $contacts, contactStatus: $contactStatus, deleteStatus: $deleteStatus, errroMessage: $errroMessage)';
   }
 }
 
@@ -60,6 +64,7 @@ abstract mixin class $ContactsStateCopyWith<$Res> {
   $Res call(
       {List<ContactEntities> contacts,
       Blocstatus? contactStatus,
+      Blocstatus? deleteStatus,
       String errroMessage});
 }
 
@@ -78,6 +83,7 @@ class _$ContactsStateCopyWithImpl<$Res>
   $Res call({
     Object? contacts = null,
     Object? contactStatus = freezed,
+    Object? deleteStatus = freezed,
     Object? errroMessage = null,
   }) {
     return _then(_self.copyWith(
@@ -88,6 +94,10 @@ class _$ContactsStateCopyWithImpl<$Res>
       contactStatus: freezed == contactStatus
           ? _self.contactStatus
           : contactStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      deleteStatus: freezed == deleteStatus
+          ? _self.deleteStatus
+          : deleteStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
       errroMessage: null == errroMessage
           ? _self.errroMessage
@@ -191,15 +201,15 @@ extension ContactsStatePatterns on ContactsState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(List<ContactEntities> contacts, Blocstatus? contactStatus,
-            String errroMessage)?
+            Blocstatus? deleteStatus, String errroMessage)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _ContactsState() when $default != null:
-        return $default(
-            _that.contacts, _that.contactStatus, _that.errroMessage);
+        return $default(_that.contacts, _that.contactStatus, _that.deleteStatus,
+            _that.errroMessage);
       case _:
         return orElse();
     }
@@ -221,14 +231,14 @@ extension ContactsStatePatterns on ContactsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(List<ContactEntities> contacts, Blocstatus? contactStatus,
-            String errroMessage)
+            Blocstatus? deleteStatus, String errroMessage)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ContactsState():
-        return $default(
-            _that.contacts, _that.contactStatus, _that.errroMessage);
+        return $default(_that.contacts, _that.contactStatus, _that.deleteStatus,
+            _that.errroMessage);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -249,14 +259,14 @@ extension ContactsStatePatterns on ContactsState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(List<ContactEntities> contacts, Blocstatus? contactStatus,
-            String errroMessage)?
+            Blocstatus? deleteStatus, String errroMessage)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ContactsState() when $default != null:
-        return $default(
-            _that.contacts, _that.contactStatus, _that.errroMessage);
+        return $default(_that.contacts, _that.contactStatus, _that.deleteStatus,
+            _that.errroMessage);
       case _:
         return null;
     }
@@ -269,6 +279,7 @@ class _ContactsState implements ContactsState {
   const _ContactsState(
       {final List<ContactEntities> contacts = const [],
       this.contactStatus,
+      this.deleteStatus,
       this.errroMessage = ''})
       : _contacts = contacts;
 
@@ -283,6 +294,8 @@ class _ContactsState implements ContactsState {
 
   @override
   final Blocstatus? contactStatus;
+  @override
+  final Blocstatus? deleteStatus;
   @override
   @JsonKey()
   final String errroMessage;
@@ -303,6 +316,8 @@ class _ContactsState implements ContactsState {
             const DeepCollectionEquality().equals(other._contacts, _contacts) &&
             (identical(other.contactStatus, contactStatus) ||
                 other.contactStatus == contactStatus) &&
+            (identical(other.deleteStatus, deleteStatus) ||
+                other.deleteStatus == deleteStatus) &&
             (identical(other.errroMessage, errroMessage) ||
                 other.errroMessage == errroMessage));
   }
@@ -312,11 +327,12 @@ class _ContactsState implements ContactsState {
       runtimeType,
       const DeepCollectionEquality().hash(_contacts),
       contactStatus,
+      deleteStatus,
       errroMessage);
 
   @override
   String toString() {
-    return 'ContactsState(contacts: $contacts, contactStatus: $contactStatus, errroMessage: $errroMessage)';
+    return 'ContactsState(contacts: $contacts, contactStatus: $contactStatus, deleteStatus: $deleteStatus, errroMessage: $errroMessage)';
   }
 }
 
@@ -331,6 +347,7 @@ abstract mixin class _$ContactsStateCopyWith<$Res>
   $Res call(
       {List<ContactEntities> contacts,
       Blocstatus? contactStatus,
+      Blocstatus? deleteStatus,
       String errroMessage});
 }
 
@@ -349,6 +366,7 @@ class __$ContactsStateCopyWithImpl<$Res>
   $Res call({
     Object? contacts = null,
     Object? contactStatus = freezed,
+    Object? deleteStatus = freezed,
     Object? errroMessage = null,
   }) {
     return _then(_ContactsState(
@@ -359,6 +377,10 @@ class __$ContactsStateCopyWithImpl<$Res>
       contactStatus: freezed == contactStatus
           ? _self.contactStatus
           : contactStatus // ignore: cast_nullable_to_non_nullable
+              as Blocstatus?,
+      deleteStatus: freezed == deleteStatus
+          ? _self.deleteStatus
+          : deleteStatus // ignore: cast_nullable_to_non_nullable
               as Blocstatus?,
       errroMessage: null == errroMessage
           ? _self.errroMessage
