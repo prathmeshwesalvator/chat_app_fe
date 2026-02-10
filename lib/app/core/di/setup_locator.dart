@@ -3,6 +3,11 @@ import 'package:chat_app_fe/app/core/localstorage/localstorage.dart';
 import 'package:chat_app_fe/app/core/networking/dio_instance.dart';
 import 'package:chat_app_fe/app/core/networking/websockets/websocket_manager.dart';
 import 'package:chat_app_fe/app/core/networking/websockets/websocket_service.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/datasource/signup/signup_data_source.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/repositories/signup/sign_up_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/service/signup/signup_service.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/repositories/signup/sign_up_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/usecases/signup/signup_usecase.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/datasource/home_datasource.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/repositories/home_repositories_impl.dart';
 import 'package:chat_app_fe/app/view/features/Home/data/repositories/home_socket_repository_impl.dart';
@@ -11,11 +16,11 @@ import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_repo
 import 'package:chat_app_fe/app/view/features/Home/domain/repositories/home_socket_repositories.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_socket_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
-import 'package:chat_app_fe/app/view/features/Login/data/datasource/login_data_source.dart';
-import 'package:chat_app_fe/app/view/features/Login/data/repositories/login_repositories_impl.dart';
-import 'package:chat_app_fe/app/view/features/Login/data/service/login_service.dart';
-import 'package:chat_app_fe/app/view/features/Login/domain/repositories/login_repositories.dart';
-import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/datasource/login/login_data_source.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/repositories/login/login_repositories_impl.dart';
+import 'package:chat_app_fe/app/view/features/Auth/data/service/login/login_service.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/repositories/login_repositories.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/usecases/login/login_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/datasource/qr_datasource.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/repositories/qr_repositories_impl.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/data/service/qr_analysis_service.dart';
@@ -102,7 +107,19 @@ Future<void> setupLocator(GetIt getIt) async {
   );
   getIt.registerLazySingleton<WebsocketService>(() => WebsocketManager());
   getIt.registerLazySingleton<HomeSocketRepositories>(() =>
-      HomeSocketRepositoryImpl(websocketService: getIt<WebsocketService>(), localstorage: getIt<Localstorage>()));
+      HomeSocketRepositoryImpl(
+          websocketService: getIt<WebsocketService>(),
+          localstorage: getIt<Localstorage>()));
   getIt.registerLazySingleton<HomeSocketUsecases>(() => HomeSocketUsecasesImpl(
       homeSocketRepositories: getIt<HomeSocketRepositories>()));
+
+  getIt.registerLazySingleton<SignUpService>(
+      () => SignUpService(getIt<DioInstance>().dio));
+  getIt.registerLazySingleton<SignupDataSource>(
+      () => SignupDataSourceImpl(signUpService: getIt<SignUpService>()));
+  getIt.registerLazySingleton<SignUpRepositories>(() => SignUpRepositoriesImpl(
+      signupDataSource: getIt<SignupDataSource>(),
+      localstorage: getIt<Localstorage>()));
+  getIt.registerLazySingleton<SignupUsecases>(
+      () => SignupUsecaseImpl(signUpRepositories: getIt<SignUpRepositories>()));
 }

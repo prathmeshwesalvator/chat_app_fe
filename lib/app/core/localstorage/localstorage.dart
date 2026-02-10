@@ -13,11 +13,11 @@ class Localstorage {
     await pref.setString(key, value);
   }
 
-  Future<void> writeAccessToken(final String value) async {
+  Future<void> writeAccessToken({required final String value}) async {
     await pref.setString('accessToken', value);
   }
 
-  Future<void> writeRefreshToken(final String value) async {
+  Future<void> writeRefreshToken({required final String value}) async {
     await pref.setString('refreshToken', value);
   }
 

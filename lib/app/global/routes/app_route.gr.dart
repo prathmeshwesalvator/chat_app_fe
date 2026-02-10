@@ -244,3 +244,19 @@ class ShowQrRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [SignupPageMobile]
+class SignupRouteMobile extends PageRouteInfo<void> {
+  const SignupRouteMobile({List<PageRouteInfo>? children})
+      : super(SignupRouteMobile.name, initialChildren: children);
+
+  static const String name = 'SignupRouteMobile';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignupPageMobile();
+    },
+  );
+}

@@ -3,11 +3,13 @@ import 'package:chat_app_fe/app/global/routes/app_route.dart';
 import 'package:chat_app_fe/app/global/theme/app_theme.dart';
 import 'package:chat_app_fe/app/global/theme/bloc/theme_cubit.dart';
 import 'package:chat_app_fe/app/global/theme/bloc/theme_state.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/usecases/signup/signup_usecase.dart';
+import 'package:chat_app_fe/app/view/features/Auth/ui/bloc/signup/signup_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_socket_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/domain/usecases/home_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Home/ui/bloc/home_bloc.dart';
-import 'package:chat_app_fe/app/view/features/Login/domain/usecases/login_usecases.dart';
-import 'package:chat_app_fe/app/view/features/Login/ui/bloc/login_cubit.dart';
+import 'package:chat_app_fe/app/view/features/Auth/domain/usecases/login/login_usecases.dart';
+import 'package:chat_app_fe/app/view/features/Auth/ui/bloc/login/login_cubit.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/domain/usecases/qr_usecases.dart';
 import 'package:chat_app_fe/app/view/features/Qr%20Analysis/ui/bloc/qr_bloc.dart';
 import 'package:chat_app_fe/app/view/features/Show%20Contacts/domain/usecases/contact_usecases.dart';
@@ -45,7 +47,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => QrBloc(qrUsecases: getIt<QrUsecases>())),
         BlocProvider(
           create: (_) => AppGlobalCubit(),
-        )
+        ),
+        BlocProvider(create: (_) => SignupBloc(signupUsecase: getIt<SignupUsecases>()))
       ],
       child: BlocBuilder<AppGlobalCubit, AppGlobalState>(
         builder: (context, state) {
